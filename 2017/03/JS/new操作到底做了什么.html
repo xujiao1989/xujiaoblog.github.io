@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端开发,个人成长,JS,继承,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;">
+<meta name="keywords" content="前端开发,个人成长,JS,继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="new操作到底做了什么">
+<meta property="og:url" content="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+<meta property="og:site_name" content="徐姣的个人博客">
+<meta property="og:description" content="1. new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-14T13:38:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="new操作到底做了什么">
+<meta name="twitter:description" content="1. new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+
+
+
+
+
+  <title>new操作到底做了什么 | 徐姣的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">徐姣的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">麻将大神徐大胖</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">new操作到底做了什么</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T00:00:00+08:00">
+                2017-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/JS/new操作到底做了什么.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/JS/new操作到底做了什么.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-new操作做了哪些"><a href="#1-new操作做了哪些" class="headerlink" title="1. new操作做了哪些"></a>1. new操作做了哪些</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      a:<span class="number">1</span>,</span><br><span class="line">      b:<span class="number">2</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"> <span class="built_in">console</span>.log(f);</span><br></pre></td></tr></table></figure>
+<p>new调用函数（实例化）执行了5项操作</p>
+<h4 id="1-1-第一步：创建一个新的对象"><a href="#1-1-第一步：创建一个新的对象" class="headerlink" title="1.1 第一步：创建一个新的对象"></a>1.1 第一步：创建一个新的对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-第二步：创建原型链接"><a href="#1-2-第二步：创建原型链接" class="headerlink" title="1.2 第二步：创建原型链接"></a>1.2 第二步：创建原型链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f._proto_ = F.prototyte;</span><br><span class="line">f._proto_ === F.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-第三步：绑定this"><a href="#1-3-第三步：绑定this" class="headerlink" title="1.3 第三步：绑定this"></a>1.3 第三步：绑定this</h4><p>让F中的的this指向f上</p>
+<h4 id="1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性"><a href="#1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性" class="headerlink" title="1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性"></a>1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.name = <span class="literal">undefined</span>, </span><br><span class="line">   f.age = <span class="literal">undefined</span>,</span><br><span class="line">   f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-5-第五步：返回新对象"><a href="#1-5-第五步：返回新对象" class="headerlink" title="1.5 第五步：返回新对象"></a>1.5 第五步：返回新对象</h4><ul>
+<li>如果返回的对象是值类型，就丢弃，返回这个新对象<br> return 1;是无效的，控制台打印的是对象f</li>
+<li>如果是引用类型，这返回这个引用类型，取代新对象<br> return {a:1,b:2}会取代f</li>
+</ul>
+<h2 id="2-call、apply、bind"><a href="#2-call、apply、bind" class="headerlink" title="2. call、apply、bind"></a>2. call、apply、bind</h2><p>三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参</p>
+<h3 id="2-1-区别在于："><a href="#2-1-区别在于：" class="headerlink" title="2.1 区别在于："></a>2.1 区别在于：</h3><ul>
+<li>call和apply本质上功能一致，都是直接执行了，但是传参的方式不一样<ul>
+<li>obj.call(obj1,arg1,arg2),</li>
+<li>obj.apply(obj1,[arg1,arg2])</li>
+</ul>
+</li>
+<li>bind没有直接执行，而是返回一个函数，我们可以链式一直玩下去~</li>
+</ul>
+<h2 id="3-继承"><a href="#3-继承" class="headerlink" title="3. 继承"></a>3. 继承</h2><p>上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。<br>那么有几种方法可以让我们使用别的对象的方法和属性呢。</p>
+<ul>
+<li><p>看上面的new操作第四步做了什么，执行了构造函数里面的代码，相当于复制了一份，那么相当于可以使用F中的属性和方法了。<br>从这个层面上看，构造函数是实现继承的一个方式。</p>
+<ul>
+<li>问题是：如果每次继承父元素的属性和方法都得复制父元素的全部代码的话，似不似撒</li>
+<li>解决方法是什么，看new操作第二步干了什么，是的，<strong>proto</strong>属性指向了F的prototype，所以可以把F中通用的方法都移到F.prototype上，这就是传说中的基于原型的继承。</li>
+</ul>
+</li>
+<li><p>另一个关于继承的方法，是利用改变this指向实现的</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xx</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> xx(<span class="string">"我"</span>,<span class="string">"18"</span>);</span><br><span class="line">b.say();</span><br></pre></td></tr></table></figure>
+<p>看到了吗  b是从xx的实例，可是它居然能使用parson的say方法，可不就是继承吗   </p>
+<h2 id="4-小知识"><a href="#4-小知识" class="headerlink" title="4. 小知识"></a>4. 小知识</h2><h3 id="4-1-Object-create-了解"><a href="#4-1-Object-create-了解" class="headerlink" title="4.1 Object.create()了解"></a>4.1 Object.create()了解</h3><ul>
+<li>是es5的新特性</li>
+<li>有两个参数，第二个参数可选（描述性）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以看下object.create的实现</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;  <span class="comment">//定义了一个隐式的构造函数</span></span><br><span class="line">     F.prototype = o;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> F();  <span class="comment">//其实还是通过new来实现的</span></span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object.create(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">//创建一个很空的对象，他的原型都是空的，区别new object</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-proto-和prototype的区别"><a href="#4-2-proto-和prototype的区别" class="headerlink" title="4.2 _ proto _ 和prototype的区别"></a>4.2 _ proto _ 和prototype的区别</h3><ul>
+<li><p><strong>JS中对象</strong>:具有属性<strong>proto</strong>，可称为隐式原型，一个对象的隐式原型指向构造该对象的<strong>构造函数的原型</strong>，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
+</li>
+<li><p>函数是个特殊的对象，除了和其他对象一样有上述<em>proto</em>属性之外，还有自己特有的属性——<strong>原型属性（prototype)</strong>，这个属性是一个指针，指向一个函数的原型对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫constructor，这个属性包含了一个指针，指回原构造函数。        </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="built_in">console</span>.log(F.constructor === <span class="built_in">Function</span>);<span class="comment">//F的构造函数是Function</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(F.__proto__)<span class="comment">//F.__proto__指向构造函数Function的原型prototype:function()&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f.constructor === F);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__);<span class="comment">//f.__proto__指向构造函数F的原型:Object&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.prototype);<span class="comment">//prototype是方法的属性,f是个普通的对象,没有prototype属性</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>constructor：constructor不需要手动创建，它是对象原型上的一个属性。Object.prototype.constructor，返回一个<strong>指向创建了该对象原型的函数引用</strong>。需要注意的是，该属性的值是那个函数本身，该属性为只读。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对于上面的例子：</span></span><br><span class="line"><span class="built_in">console</span>.log(F.constructor)</span><br><span class="line"><span class="comment">//Function() &#123; [native code] &#125;</span></span><br><span class="line"> <span class="built_in">console</span>.log(f.constructor);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.name = name;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line">     <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-其他"><a href="#5-其他" class="headerlink" title="5. 其他"></a>5. 其他</h2><ul>
+<li>构造函数的首字母一般大写</li>
+<li>值类型赋值是值的复制</li>
+<li>对象类型的赋值不仅是值的复制也是引用的复制<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">b.push(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//a[1,2,3,4] b[1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">    b = a;<span class="comment">//值和引用都给了b</span></span><br><span class="line">    b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];<span class="comment">// a[1,2,3] b[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>做一个勤于思考的人</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端开发/" rel="tag"># 前端开发</a>
+          
+            <a href="/tags/个人成长/" rel="tag"># 个人成长</a>
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+            <a href="/tags/继承/" rel="tag"># 继承</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/其他/gulp小白文.html" rel="next" title="gulp小白文">
+                <i class="fa fa-chevron-left"></i> gulp小白文
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/前端面试题/前端面试题-第一套.html" rel="prev" title="前端面试题--第一套">
+                前端面试题--第一套 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="/2017/03/JS/new操作到底做了什么.html" data-title="new操作到底做了什么" data-url="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avater.jpeg" alt="徐姣">
+            
+              <p class="site-author-name" itemprop="name">徐姣</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-new操作做了哪些"><span class="nav-number">1.</span> <span class="nav-text">1. new操作做了哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-第一步：创建一个新的对象"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 第一步：创建一个新的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-第二步：创建原型链接"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 第二步：创建原型链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-第三步：绑定this"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 第三步：绑定this</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-第五步：返回新对象"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.5 第五步：返回新对象</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#2-call、apply、bind"><span class="nav-number">2.</span> <span class="nav-text">2. call、apply、bind</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-区别在于："><span class="nav-number">2.1.</span> <span class="nav-text">2.1 区别在于：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-继承"><span class="nav-number">3.</span> <span class="nav-text">3. 继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-小知识"><span class="nav-number">4.</span> <span class="nav-text">4. 小知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Object-create-了解"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Object.create()了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-proto-和prototype的区别"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 _ proto _ 和prototype的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-其他"><span class="nav-number">5.</span> <span class="nav-text">5. 其他</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐姣</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xujiaoblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

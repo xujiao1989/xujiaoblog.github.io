@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端开发,前端面试题,HTML5简介,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc123456// 如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;var rg1 = /uin=o(\d&amp;#123;10&amp;#125;)/g;var ma">
+<meta name="keywords" content="前端开发,前端面试题,HTML5简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题-第二套">
+<meta property="og:url" content="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
+<meta property="og:site_name" content="徐姣的个人博客">
+<meta property="og:description" content="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc123456// 如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;var rg1 = /uin=o(\d&amp;#123;10&amp;#125;)/g;var ma">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-14T13:38:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试题-第二套">
+<meta name="twitter:description" content="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc123456// 如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;var rg1 = /uin=o(\d&amp;#123;10&amp;#125;)/g;var ma">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
+
+
+
+
+
+  <title>前端面试题-第二套 | 徐姣的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">徐姣的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">麻将大神徐大胖</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端面试题-第二套</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:10:00+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML5学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML5学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/前端面试题/前端面试题-第二套.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/前端面试题/前端面试题-第二套.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc"><a href="#1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc" class="headerlink" title="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc"></a>1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o<strong>3052202501</strong>;ptisp=ctc</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果配合其他的字符的话,可以知道,加粗的那个"3052202501"</span></span><br><span class="line"><span class="keyword">var</span> rg1 = <span class="regexp">/uin=o(\d&#123;10&#125;)/g</span>;</span><br><span class="line"><span class="keyword">var</span> match = rg1.exec(str);</span><br><span class="line"><span class="keyword">var</span> index = <span class="built_in">parseInt</span>(match.index)+<span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"匹配的字符串的位置在:"</span>+index);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"匹配到的字符串为:"</span>+match[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
+<h4 id="2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数"><a href="#2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数" class="headerlink" title="2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数"></a>2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">               <span class="keyword">var</span> length = str.length;</span><br><span class="line">               <span class="keyword">if</span>(length ==<span class="number">0</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">var</span> max = <span class="number">1</span>;</span><br><span class="line">               <span class="keyword">var</span> maxChar = str[<span class="number">0</span>];</span><br><span class="line">               <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">                   <span class="keyword">if</span>(str[i] <span class="keyword">in</span> obj)&#123;</span><br><span class="line">                       obj[str[i]] ++;</span><br><span class="line">                       <span class="keyword">if</span>(max &lt; obj[str[i]])&#123;</span><br><span class="line">                           max = obj[str[i]];</span><br><span class="line">                           maxChar = str[i];</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                       obj[str[i]] = <span class="number">1</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">              <span class="keyword">return</span> &#123;</span><br><span class="line">                  maxNum : max,</span><br><span class="line">                  maxChar :maxChar</span><br><span class="line">              &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7"><a href="#3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7" class="headerlink" title="3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7"></a>3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</h4><p>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。</p>
+<h4 id="4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集"><a href="#4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集" class="headerlink" title="4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集"></a>4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</h4><h4 id="5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。"><a href="#5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。" class="headerlink" title="5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。"></a>5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端开发/" rel="tag"># 前端开发</a>
+          
+            <a href="/tags/前端面试题/" rel="tag"># 前端面试题</a>
+          
+            <a href="/tags/HTML5简介/" rel="tag"># HTML5简介</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/个人成长/2017-01-13-plan.html" rel="next" title="2017个人规划">
+                <i class="fa fa-chevron-left"></i> 2017个人规划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/版本控制/2017-02-13-git学习笔记.html" rel="prev" title="git学习笔记">
+                git学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="/2017/02/前端面试题/前端面试题-第二套.html" data-title="前端面试题-第二套" data-url="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avater.jpeg" alt="徐姣">
+            
+              <p class="site-author-name" itemprop="name">徐姣</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc"><span class="nav-number">1.</span> <span class="nav-text">1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数"><span class="nav-number">2.</span> <span class="nav-text">2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7"><span class="nav-number">3.</span> <span class="nav-text">3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集"><span class="nav-number">4.</span> <span class="nav-text">4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。"><span class="nav-number">5.</span> <span class="nav-text">5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐姣</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xujiaoblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
