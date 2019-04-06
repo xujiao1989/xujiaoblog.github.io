@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="前端开发,代码版本控制,git,">
+  <meta name="keywords" content="前端开发,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1. 强制从远程拉取最新代码git reset –hard remote remote address 2. 已经拉取远程代码，现在需要clone某一个分支git checkout remote/branch-name 3. 将本地创建的分支提交至远程 远程新分支: git push origin new branch name,可以是本地分支名 远程老分支: git push origin 本地">
-<meta name="keywords" content="前端开发,代码版本控制,git">
+<meta name="description" content="撰写本文的原因和目标1、 原因 最近团队一直在讨论如何保证前端代码质量，如何降低现网的问题数。除了编码规范及质量外，另一个重要的部分就是前端自动化测试。 虽然之前也接触过一些，但是没有深入了解过这一块的知识点，通过学习总结的方式加深对这一块的理解。 之前看到一个好代码的标准，其中有一条就是代码是可测试的。  2、目标 本文对于开发人员来讲是浅显易懂的，如果有讲的不清楚的地方欢迎给我提意见。 通过本">
+<meta name="keywords" content="前端开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git学习笔记">
-<meta property="og:url" content="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
+<meta property="og:title" content="深入浅出前端自动化测试">
+<meta property="og:url" content="https://xujiao1989.github.io/blog/2019/04/前端自动化测试流程学习总结.html">
 <meta property="og:site_name" content="徐姣的个人博客">
-<meta property="og:description" content="1. 强制从远程拉取最新代码git reset –hard remote remote address 2. 已经拉取远程代码，现在需要clone某一个分支git checkout remote/branch-name 3. 将本地创建的分支提交至远程 远程新分支: git push origin new branch name,可以是本地分支名 远程老分支: git push origin 本地">
+<meta property="og:description" content="撰写本文的原因和目标1、 原因 最近团队一直在讨论如何保证前端代码质量，如何降低现网的问题数。除了编码规范及质量外，另一个重要的部分就是前端自动化测试。 虽然之前也接触过一些，但是没有深入了解过这一块的知识点，通过学习总结的方式加深对这一块的理解。 之前看到一个好代码的标准，其中有一条就是代码是可测试的。  2、目标 本文对于开发人员来讲是浅显易懂的，如果有讲的不清楚的地方欢迎给我提意见。 通过本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-14T13:38:53.000Z">
+<meta property="og:updated_time" content="2019-04-06T13:26:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git学习笔记">
-<meta name="twitter:description" content="1. 强制从远程拉取最新代码git reset –hard remote remote address 2. 已经拉取远程代码，现在需要clone某一个分支git checkout remote/branch-name 3. 将本地创建的分支提交至远程 远程新分支: git push origin new branch name,可以是本地分支名 远程老分支: git push origin 本地">
+<meta name="twitter:title" content="深入浅出前端自动化测试">
+<meta name="twitter:description" content="撰写本文的原因和目标1、 原因 最近团队一直在讨论如何保证前端代码质量，如何降低现网的问题数。除了编码规范及质量外，另一个重要的部分就是前端自动化测试。 虽然之前也接触过一些，但是没有深入了解过这一块的知识点，通过学习总结的方式加深对这一块的理解。 之前看到一个好代码的标准，其中有一条就是代码是可测试的。  2、目标 本文对于开发人员来讲是浅显易懂的，如果有讲的不清楚的地方欢迎给我提意见。 通过本">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
+  <link rel="canonical" href="https://xujiao1989.github.io/blog/2019/04/前端自动化测试流程学习总结.html">
 
 
 
 
 
-  <title>git学习笔记 | 徐姣的个人博客</title>
+  <title>深入浅出前端自动化测试 | 徐姣的个人博客</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/04/前端自动化测试流程学习总结.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="徐姣">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">git学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">深入浅出前端自动化测试</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:49:00+08:00">
-                2017-02-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T19:34:45+08:00">
+                2019-04-03
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/代码版本控制/" itemprop="url" rel="index">
-                    <span itemprop="name">代码版本控制</span>
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
                   </a>
                 </span>
 
@@ -333,8 +333,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/版本控制/2017-02-13-git学习笔记.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/版本控制/2017-02-13-git学习笔记.html" itemprop="commentCount"></span>
+                <a href="/2019/04/前端自动化测试流程学习总结.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2019/04/前端自动化测试流程学习总结.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,79 +362,52 @@
       
 
       
-        <h3 id="1-强制从远程拉取最新代码"><a href="#1-强制从远程拉取最新代码" class="headerlink" title="1. 强制从远程拉取最新代码"></a>1. 强制从远程拉取最新代码</h3><p>git reset –hard remote remote address</p>
-<h3 id="2-已经拉取远程代码，现在需要clone某一个分支"><a href="#2-已经拉取远程代码，现在需要clone某一个分支" class="headerlink" title="2. 已经拉取远程代码，现在需要clone某一个分支"></a>2. 已经拉取远程代码，现在需要clone某一个分支</h3><p>git checkout remote/branch-name</p>
-<h3 id="3-将本地创建的分支提交至远程"><a href="#3-将本地创建的分支提交至远程" class="headerlink" title="3. 将本地创建的分支提交至远程"></a>3. 将本地创建的分支提交至远程</h3><ul>
-<li>远程新分支: git push origin new branch name,可以是本地分支名</li>
-<li>远程老分支: git push origin 本地分支名：远程分支名(也可以用于创建新分支)</li>
+        <h2 id="撰写本文的原因和目标"><a href="#撰写本文的原因和目标" class="headerlink" title="撰写本文的原因和目标"></a>撰写本文的原因和目标</h2><h4 id="1、-原因"><a href="#1、-原因" class="headerlink" title="1、 原因"></a>1、 原因</h4><ul>
+<li>最近团队一直在讨论如何保证前端代码质量，如何降低现网的问题数。除了编码规范及质量外，另一个重要的部分就是前端自动化测试。</li>
+<li>虽然之前也接触过一些，但是没有深入了解过这一块的知识点，通过学习总结的方式加深对这一块的理解。</li>
+<li>之前看到一个好代码的标准，其中有一条就是代码是可测试的。</li>
 </ul>
-<h3 id="4-git-init"><a href="#4-git-init" class="headerlink" title="4. git init"></a>4. git init</h3><p>将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码</p>
-<h3 id="5-git-status"><a href="#5-git-status" class="headerlink" title="5. git status"></a>5. git status</h3><p>查看文件是否被修改</p>
-<h3 id="6-git-diff"><a href="#6-git-diff" class="headerlink" title="6. git diff"></a>6. git diff</h3><p>查看文件修改内容</p>
-<h3 id="7-git-reflog"><a href="#7-git-reflog" class="headerlink" title="7. git reflog"></a>7. git reflog</h3><p>用来记录每一次的提交 </p>
-<h3 id="8-撤销工作区的修改-未add和commit的"><a href="#8-撤销工作区的修改-未add和commit的" class="headerlink" title="8. 撤销工作区的修改(未add和commit的)"></a>8. 撤销工作区的修改(未add和commit的)</h3><p>git checkout –file / git checkout – .</p>
-<h3 id="9-回退版本-git-reset"><a href="#9-回退版本-git-reset" class="headerlink" title="9. 回退版本-git reset"></a>9. 回退版本-git reset</h3><ul>
-<li><p>参数</p>
+<h4 id="2、目标"><a href="#2、目标" class="headerlink" title="2、目标"></a>2、目标</h4><ul>
+<li>本文对于开发人员来讲是浅显易懂的，如果有讲的不清楚的地方欢迎给我提意见。</li>
+<li>通过本文能够对前端的自动化测试的过程、工具有基本的了解，并且能够自己在项目中编写。</li>
+</ul>
+<h2 id="常见的基本概念"><a href="#常见的基本概念" class="headerlink" title="常见的基本概念"></a>常见的基本概念</h2><p>软件开发中完整的测试流程包括：UT、IT、ST、UAT</p>
 <ul>
-<li>hard</li>
-<li>soft</li>
-<li>mixed</li>
+<li>UT（单元测试）：unit test  </li>
+<li>IT（集成测试）：system integration test</li>
+<li>ST（系统测试）：system test</li>
+<li>UAT（用户接受测试/验收测试）: user acceptance test</li>
 </ul>
+<p>而每一块测试的主要侧重点不一样。</p>
+<p>我们在前端开发阶段需要考虑的比较多的是：单元测试、集成测试。</p>
+<h4 id="1、单元测试UT"><a href="#1、单元测试UT" class="headerlink" title="1、单元测试UT"></a>1、单元测试UT</h4><ul>
+<li><p>单元测试的概念：</p>
+<p> 单元测试是针对<code>程序的最小单元</code>来进行正确性检验的测试工作。程序单元是应用的最小可测试部件。一个单元可能是单个程序、类、对象、方法等。 ——维基百科</p>
+<p> 更简单一点来说，单元测试就是为了保证我们编写的每一个函数的正确性。<br><br></p>
 </li>
-<li><p>git reset –hard commit_id  </p>
-<p> git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
-</li>
-</ul>
-<h3 id="10-git-rm-file"><a href="#10-git-rm-file" class="headerlink" title="10. git rm file"></a>10. git rm file</h3><p> 删除一个文件</p>
-<h3 id="11-git-分支"><a href="#11-git-分支" class="headerlink" title="11. git 分支"></a>11. git 分支</h3><ul>
-<li>在本地,工作区只有一个,所以工作区所有的修改,只要没有提交到对应的分支上,会体现在所有的分支</li>
-<li>git add 将工作区的内容提交到暂存区</li>
-<li>git commit 将暂存区的内容提交到当前分支</li>
-<li>常用分支命令<ul>
-<li>git branch:查看分支</li>
-<li>git branch -a：查看远程分支</li>
-<li>git checkout branch-name: 切换分支</li>
-<li>git checkout -b name: 创建并且切换分支</li>
-<li>git branch -d branch-name: 删除分支</li>
-<li>git merge xxx:  将xxx分支的内容合并到当前分支</li>
-</ul>
-</li>
-</ul>
-<h3 id="12-git-stash"><a href="#12-git-stash" class="headerlink" title="12. git stash"></a>12. git stash</h3><ul>
-<li>暂时存储当前工区的内容</li>
-<li>存储后,任何分支都没有之前的修改,因为没有add commit</li>
-<li>git stash操作的区域仍然是工作区,所以所有的分支都能读到暂存的内容</li>
-<li>暂存的常用命令<ul>
-<li>git stash list: 查看所有的stash内容</li>
-<li>git stash apply: 恢复stash内容</li>
-<li>git stash drop: 删除stash的内容</li>
-<li>git stash pop: 恢复并且删除stash的内容</li>
-</ul>
-</li>
-</ul>
-<h3 id="13-git-tag"><a href="#13-git-tag" class="headerlink" title="13. git tag"></a>13. git tag</h3><p>打标签,方便回滚,这个主要哦针对一个完整功能上线时打一个tag,方便回滚到上一个功能(类似于-m的作用,只是-m针对每一次的提交)</p>
+<li><p>单元测试的主要任务是：</p>
 <ul>
-<li>git tag: 控制台打印所有的标签</li>
-<li>git tag -l ‘V0.1*’: 搜索符合模式的tag</li>
-<li>打标签的常用命令<ul>
-<li>切换标签: git checkout tagname</li>
-<li>git tag -g v0.1.1.9fbc3d0 :给特定的commit打tag</li>
-<li>标签的发布: git push origin -tags # 说明</li>
+<li>模块接口测试；</li>
+<li>模块局部数据结构测试；</li>
+<li>模块边界条件测试；</li>
+<li>模块中所有独立执行通路测试；</li>
+<li>模块的各条错误处理通路测试；<br><br></li>
+</ul>
+</li>
+<li><p>单元测试的意义：</p>
+<p>  我们一直都在讨论好的代码是什么样子的，网上也给出了很多答案，其中有一条就是<code>写出的代码要是可测试的</code>。编写可测试的代码意味着我们需要注意: 功能代码拆分抽象规模更小、功能独立、降低业务耦合度；在写代码时考虑各种边界条件、极限情况。这样做的意义在于：</p>
+<ul>
+<li>功能细粒化，各个部件功能互不打扰，修改起来引入bug可能性减小，也提高代码可维护性</li>
+<li>对各个部件的边界极限条件进行测试，提高代码质量</li>
+<li>可以快速定位bug</li>
+<li>细粒化的功能部件使得我们重构扩展业务变得更加轻松</li>
 </ul>
 </li>
 </ul>
-<h3 id="14-将本地文件夹关联远程仓库"><a href="#14-将本地文件夹关联远程仓库" class="headerlink" title="14. 将本地文件夹关联远程仓库"></a>14. 将本地文件夹关联远程仓库</h3><p>git remote add origin git@<a href="http://xujiao1989/xxx" target="_blank" rel="noopener">http://xujiao1989/xxx</a></p>
-<h3 id="15-关于-gitignore"><a href="#15-关于-gitignore" class="headerlink" title="15. 关于.gitignore"></a>15. 关于.gitignore</h3><ul>
-<li>只能忽略那些原来没有被trace的文件</li>
-<li><p>如何解决添加规则后不生效的问题</p>
-<p>   git rm –cached file</p>
-<p>   忽略整个文件夹下： git rm –cached file_path -r</p>
-</li>
-</ul>
-<h3 id="16-查看git配置等"><a href="#16-查看git配置等" class="headerlink" title="16. 查看git配置等"></a>16. 查看git配置等</h3><p>git config -l</p>
-<h3 id="17-TIPS"><a href="#17-TIPS" class="headerlink" title="17. TIPS"></a>17. TIPS</h3><ul>
-<li>git跟踪的是修改,而不是文件</li>
-<li>在git当中,HEAD表示的是当前版本,上一个版本是HEAD^,上上个版本是HEAD^^,所以回退到上一个版本可以是git reset –hard HEAD^(这里也可以是特定的提交)</li>
+<h4 id="2、集成测试IT"><a href="#2、集成测试IT" class="headerlink" title="2、集成测试IT"></a>2、集成测试IT</h4><p>单元测试主要针对单个的函数单元进行验证的，而集成测试是将个个业务逻辑连起来验证，可能会整合了若干的单元测试。这种测试方式更多的是黑盒测试。</p>
+<h2 id="前端自动化测试工具调研"><a href="#前端自动化测试工具调研" class="headerlink" title="前端自动化测试工具调研"></a>前端自动化测试工具调研</h2><h2 id="如果写一个单元测试"><a href="#如果写一个单元测试" class="headerlink" title="如果写一个单元测试"></a>如果写一个单元测试</h2><h2 id="如何在前端项目完成集测试"><a href="#如何在前端项目完成集测试" class="headerlink" title="如何在前端项目完成集测试"></a>如何在前端项目完成集测试</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.cnblogs.com/shuaiandjun/p/8491686.html" target="_blank" rel="noopener">软件开发中的完整测试所包括的环节</a></li>
+<li><a href="https://segmentfault.com/a/1190000006736224" target="_blank" rel="noopener">谈谈为什么写单元测试</a></li>
 </ul>
 
       
@@ -455,10 +428,6 @@
           
             <a href="/tags/前端开发/" rel="tag"># 前端开发</a>
           
-            <a href="/tags/代码版本控制/" rel="tag"># 代码版本控制</a>
-          
-            <a href="/tags/git/" rel="tag"># git</a>
-          
         </div>
       
 
@@ -470,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/前端面试题/前端面试题-第二套.html" rel="next" title="前端面试题-第二套">
-                <i class="fa fa-chevron-left"></i> 前端面试题-第二套
+              <a href="/2019/03/2019学习总结.html" rel="next" title="2019学习总结一">
+                <i class="fa fa-chevron-left"></i> 2019学习总结一
               </a>
             
           </div>
@@ -479,10 +448,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/个人成长/前端资料总结.html" rel="prev" title="前端资料总结">
-                前端资料总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -513,7 +478,7 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="/2017/02/版本控制/2017-02-13-git学习笔记.html" data-title="git学习笔记" data-url="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
+      <div class="ds-thread" data-thread-key="/2019/04/前端自动化测试流程学习总结.html" data-title="深入浅出前端自动化测试" data-url="https://xujiao1989.github.io/blog/2019/04/前端自动化测试流程学习总结.html">
       </div>
     </div>
 
@@ -622,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-强制从远程拉取最新代码"><span class="nav-number">1.</span> <span class="nav-text">1. 强制从远程拉取最新代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-已经拉取远程代码，现在需要clone某一个分支"><span class="nav-number">2.</span> <span class="nav-text">2. 已经拉取远程代码，现在需要clone某一个分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-将本地创建的分支提交至远程"><span class="nav-number">3.</span> <span class="nav-text">3. 将本地创建的分支提交至远程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-git-init"><span class="nav-number">4.</span> <span class="nav-text">4. git init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-git-status"><span class="nav-number">5.</span> <span class="nav-text">5. git status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-git-diff"><span class="nav-number">6.</span> <span class="nav-text">6. git diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-git-reflog"><span class="nav-number">7.</span> <span class="nav-text">7. git reflog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-撤销工作区的修改-未add和commit的"><span class="nav-number">8.</span> <span class="nav-text">8. 撤销工作区的修改(未add和commit的)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-回退版本-git-reset"><span class="nav-number">9.</span> <span class="nav-text">9. 回退版本-git reset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-git-rm-file"><span class="nav-number">10.</span> <span class="nav-text">10. git rm file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-git-分支"><span class="nav-number">11.</span> <span class="nav-text">11. git 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-git-stash"><span class="nav-number">12.</span> <span class="nav-text">12. git stash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-git-tag"><span class="nav-number">13.</span> <span class="nav-text">13. git tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-将本地文件夹关联远程仓库"><span class="nav-number">14.</span> <span class="nav-text">14. 将本地文件夹关联远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-关于-gitignore"><span class="nav-number">15.</span> <span class="nav-text">15. 关于.gitignore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-查看git配置等"><span class="nav-number">16.</span> <span class="nav-text">16. 查看git配置等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-TIPS"><span class="nav-number">17.</span> <span class="nav-text">17. TIPS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#撰写本文的原因和目标"><span class="nav-number">1.</span> <span class="nav-text">撰写本文的原因和目标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-原因"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、 原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、目标"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、目标</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的基本概念"><span class="nav-number">2.</span> <span class="nav-text">常见的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、单元测试UT"><span class="nav-number">2.0.1.</span> <span class="nav-text">1、单元测试UT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、集成测试IT"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、集成测试IT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端自动化测试工具调研"><span class="nav-number">3.</span> <span class="nav-text">前端自动化测试工具调研</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果写一个单元测试"><span class="nav-number">4.</span> <span class="nav-text">如果写一个单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在前端项目完成集测试"><span class="nav-number">5.</span> <span class="nav-text">如何在前端项目完成集测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></div>
             
 
           </div>

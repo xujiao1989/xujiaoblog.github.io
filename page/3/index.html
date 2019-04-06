@@ -259,6 +259,276 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/网络/HTTP简介.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/网络/HTTP简介.html" itemprop="url">HTTP学习总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T00:00:00+08:00">
+                2017-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/网络/HTTP简介.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/网络/HTTP简介.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。<br>站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：</p>
+<ul>
+<li><code>更好的定位问题：</code>我们发送一个请求之后，可以根据请求返回的状态码定位这次请求是否成功，如果没有成功是谁的问题</li>
+<li><code>让前后端通信更快更安全：</code>在更深入的了解http请求后，我们就知道http通信的瓶颈在哪，有哪些行为会导致此次通信不安全、如何做可以让通信更快</li>
+<li><code>用更好的方式去沟通：</code>不同的业务场景选用不同的方法沟通不仅仅提高可读性，也可以提高安全性、服务器处理的效率</li>
+<li><code>应付面试：</code>很重要<br>其实主要内容我还是从《HTTP权威指南》上抄的~</li>
+</ul>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>http说的通俗一点，相当于客户端和服务器端的沟通语言。那么http协议简单来说包括哪些内容呢：</p>
+<ol>
+<li>如何沟通：http报文，告诉客户端如何提出要求，服务器端应该怎样分析客户端的请求并给出响应的反应</li>
+<li>沟通的高效性：http缓存、长连接等</li>
+<li>沟通的安全性：https、客户端识别、cookie机制<br>站在前端的角度来讲，我们常用的客户端是浏览器，服务器端可以是任何提供服务一个机器（废话）。</li>
+</ol>
+<h2 id="2-如何沟通–http报文结构"><a href="#2-如何沟通–http报文结构" class="headerlink" title="2. 如何沟通–http报文结构"></a>2. 如何沟通–http报文结构</h2><p>这个部分主要讲解客户端和服务器端应该遵循什么样的规范来沟通。他们都得遵循http报文规范。</p>
+<ul>
+<li>http报文是什么：简单的格式化数据块</li>
+<li><p>http报文包含3个部分</p>
+<ul>
+<li>起始行：对报文进行描述</li>
+<li>首部：包含一些属性</li>
+<li><p>主体（可以没有）：包含数据主体</p>
+<h5 id="2-1-请求报文格式"><a href="#2-1-请求报文格式" class="headerlink" title="2.1 请求报文格式"></a>2.1 请求报文格式</h5><p>method request-url version<br>headers</p>
+<p>entity-body</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-2-响应报文格式"><a href="#2-2-响应报文格式" class="headerlink" title="2.2 响应报文格式"></a>2.2 响应报文格式</h5><pre><code>version status reason-phrase
+headers
+
+entity-body
+</code></pre><h2 id="3-method请求的方法"><a href="#3-method请求的方法" class="headerlink" title="3. method请求的方法"></a>3. method请求的方法</h2><p>HTTP规范总共定义了<strong>7个</strong>请求方法，为了告诉客户端，客户端想要执行什么动作。但不是每个服务器都实现了以下的方法。<strong>HTTP1.1协议要求实现GET和HEAD方法</strong></p>
+<ol>
+<li>GET:从服务器端获取资源，没有实体<br>HTTP1.1要求实现GET方法</li>
+<li>HEAD：从服务器获取资源的首部，没有实体<br>与GET方法很类似，但是服务器在响应中只返回首部，不会返回实体的主体部分。HTTP1.1要求实现GET方法。HEAD方法可以用来：        <ul>
+<li>在不获取资源的情况下，知道资源的情况（资源的类型）</li>
+<li>通过查看资源的状态码，了解资源的存在情况</li>
+<li>通过查看首部，看资源是否被修改了        </li>
+</ul>
+</li>
+<li><p>POST：向服务器发送需要处理的数据，<strong>有实体</strong></p>
+</li>
+<li><p>PUT:将请求的主体部分放在服务器上，<strong>有实体</strong><br>PUT请求让服务器用PUT请求带的主体部分来创建一个由它所请求的url命名的新文档，如果文档已经存在，则覆盖它。PUT请求容许用户修改服务器的内容，所以从安全性角度来讲，应该要用户登录。        </p>
+</li>
+<li>TRACE：对可能经过的代理服务器传送到服务器上去的报文进行追踪，没有实体<br>客户端发一个请求到达服务器时，可能会经过很多的代理服务器、防护墙、网关等等，中间每一个环节都有可能改变原来的HTTP请求。TRACE方法，容许客户端在最终发送请求到服务器端时，看看它变成了什么样子。最后一站的服务器会返回一个相关的响应，并在主体中携带上原始的请求报文。        <ul>
+<li>优点：可以用于查看代理和其他的应用程序对用户请求的影响</li>
+<li>缺点：它假定了中间程序对不同方法的请求处理方式是一致的。说到底我们还是不能保证中间代理和网关等对用户请求处理方式是一致的</li>
+</ul>
+</li>
+<li>OPTIONS：决定（”决定二字”如何来理解？）可以在服务器上执行哪些方式，没有实体<br>OPTIONS方式是希望服务器告诉我们，我们可以使用哪些方法，或者说对特殊资源支持哪些方法。            </li>
+<li>DELETE：从服务器上删除一份文档，没有实体<br>请求服务器端删除一个资源，但是不能保证这个请求一定会被执行，因为HTTP的规范容许服务器在不通知客户端的情况下撤销请求。        </li>
+<li>扩展方法<br>HTTP被设计成字段可拓展的，这样可以向下兼容。但是我并不想看这块。</li>
+</ol>
+<h2 id="4-请求的URL简单介绍"><a href="#4-请求的URL简单介绍" class="headerlink" title="4. 请求的URL简单介绍"></a>4. 请求的URL简单介绍</h2><p>URL提供了统一的资源命名方式：方案：//服务器位置//路径。URL的语法会由于方案的不同而不同,几乎没有哪个URL中包含了所以所有的组件：scheme://user:pwd@host:port/path;params?query#frag</p>
+<ol>
+<li>params参数<br>一个URL中可以有多个参数，参数为键值对，各个参数之间以及参数与URL其他部分之间用逗号分隔        </li>
+<li>query<br>查询组件的内容没有通用的格式，用字符“？”将其与URL的其余部分分隔开</li>
+</ol>
+<h5 id="4-1-方案：例如HTTP-FTP-SMTP"><a href="#4-1-方案：例如HTTP-FTP-SMTP" class="headerlink" title="4.1 方案：例如HTTP/FTP/SMTP"></a>4.1 方案：例如HTTP/FTP/SMTP</h5><p>方案名不区分大小写,告诉应用程序应该使用什么协议        </p>
+<h2 id="5-版本"><a href="#5-版本" class="headerlink" title="5. 版本"></a>5. 版本</h2><p>格式类似于HTTP/1.1,HTTP/2.0,是为了服务器和客户端之间相互了解各自的能力和报文的格式。版本号说明了应用程序支持的最高的HTTP版本。版本号不会被当做小数来处理，所以HTTP2.22比HTTP2.3的版本要高，因为22&gt;3</p>
+<h2 id="6-状态码"><a href="#6-状态码" class="headerlink" title="6. 状态码"></a>6. 状态码</h2><p>状态码配合原因短语一起告诉客户端他的请求处于什么状态,目前有5个种类的状态码</p>
+<ul>
+<li>100~199:信息类状态码(目前实现了2个)</li>
+<li>200~299:成功类状态码(目前实现了7个)</li>
+<li>300~399:重定向类状态码(目前实现了7个)</li>
+<li>400~499:客户端失败状态码(目前实现了18个)</li>
+<li>500~599:服务器端状态码(目前实现了6个)</li>
+</ul>
+<h5 id="6-1-信息类状态码"><a href="#6-1-信息类状态码" class="headerlink" title="6.1 信息类状态码"></a>6.1 信息类状态码</h5><p>这类型状态码是http1.1引入的,都比较新也比较受争议,所以目前只实现了2个:</p>
+<ol>
+<li>100 Continue<br>说明服务器端已经收到部分请求,请求客户端继续。那么为什么我们需要这个状态码: http客户端应用程序要发给服务器一个实体的主体,但是在发送前想知道服务器端是否接受服务器端只有接受到带有值为100 continue的expires请求头时才会返回100状态码,</li>
+<li>101 switching protocols<br>说明服务器根据客户端的请示,将协议切换成update首部所列的协议</li>
+</ol>
+<h5 id="6-2-成功类状态码"><a href="#6-2-成功类状态码" class="headerlink" title="6.2 成功类状态码"></a>6.2 成功类状态码</h5><p>目前已经实现了7个(200~206)</p>
+<ol>
+<li>200 OK<br>请求没有问题,响应的实体主体部分包含请求的资源</li>
+<li>201 created<br>主要用来创建服务器端请求(PUT)<br>服务器在返回改状态码前必须已经创建好对象<br>响应的主体部分应该包含各组引用了已创建的资源的URL</li>
+<li>202 Accept<br>请求已经被接受,但是服务器还未对该请求做任何处理也不能保证服务器能完成这个请求<br>返回的实体主体部分包含对该请求的状态描述,或者也可以加上对请求完成时间的估计</li>
+<li>203 None-Authoritative Information<br>实体的信息不是来自于服务器端,而是来自于资源的一个副本<br>如中间节点上有一份资源副本,但无法或者对发送资源进行验证就可以发送这个状态码</li>
+<li>204 No content<br>响应中包含起始行和首部,但是每天实体的主体部分<br>主要用于浏览器不转为显示新文档的情况下对其进行更新</li>
+<li>205 Reset content<br>也是主要用于浏览器<br>用于告知浏览器清空所以得HTML元素</li>
+<li>206 partial content<br>成功的执行了一个range请求<br>206响应必须包含以下几个响应</li>
+</ol>
+<ul>
+<li>Content-range</li>
+<li>Date</li>
+<li>ETag</li>
+<li>Content-Location</li>
+</ul>
+<h5 id="6-3-重定向类状态码-目前实现了7个"><a href="#6-3-重定向类状态码-目前实现了7个" class="headerlink" title="6.3 重定向类状态码(目前实现了7个)"></a>6.3 重定向类状态码(目前实现了7个)</h5><ol>
+<li>300 Multiple Choice<br>请求的url对应多个资源(中文、英文等)会返回该状态码<br>服务器可以在响应的location首部给出首选的URL</li>
+<li>301 Moved permanently<br>表示请求的资源已经转移<br>响应的location头部应该包含资源的新URL</li>
+<li>302 Found<br>与301类似,客户端使用响应的location首部来临时定位资源<br>以后还是会使用来的URL定位资源</li>
+<li>303 See Other<br>告知客户端使用另一个URL来访问资源<br>新的URL位于响应的location首部<br>主要目的是容许post请求将客户端定位到某个资源上<br>讲真,我已经晕了</li>
+<li>304 Not Found<br>这个我倒是经常遇到,传说中的条件缓存<br>客户端的条件get请求,资源未被修改<br>响应的实体不包含主体部分</li>
+<li>305 use proxy<br>必须通过代理来访问资源,代理的位置在响应的location首部</li>
+<li>306 未使用</li>
+<li>307 Temporary Redirect<br>临时的重定向,类似于301,但响应中给出的是临时的url<br>以后还是使用老的url来访问资源</li>
+</ol>
+<h5 id="6-4-服务器端错误状态码"><a href="#6-4-服务器端错误状态码" class="headerlink" title="6.4 服务器端错误状态码"></a>6.4 服务器端错误状态码</h5><p>目前实现了6个</p>
+<ol>
+<li>500 Internal server error<br>遇到妨碍服务器提供服务的内部错误时返回</li>
+<li>501 Not implemented<br>客户端发起的请求超出了服务器的能力范围,例如使用了服务器不支持的方法</li>
+<li>502 bad gateway<br>代理在请求的响应链的下一条链时返回一个伪响应(如无法连接父代理)<br>测试过程中,测试服务器挂了会报这个错误类型</li>
+<li>503 service unavailable<br>表示服务器现在没办法为请求提供服务,但是未来可以<br>如果服务器知道什么时候能够用,可以在响应中返回一个包含retry-after首部</li>
+<li>504 gateway timeout<br>类似于408,这里的响应来自于网关或者代理<br>在等服务器等待请求进行响应时超时了</li>
+<li>505 http version not support</li>
+</ol>
+<h2 id="7-学习时间线"><a href="#7-学习时间线" class="headerlink" title="7. 学习时间线"></a>7. 学习时间线</h2><h5 id="2017-02-27"><a href="#2017-02-27" class="headerlink" title="2017-02-27"></a>2017-02-27</h5><ul>
+<li>http简介</li>
+<li>http报文结构</li>
+<li>url</li>
+<li>请求的方法</li>
+</ul>
+<h5 id="2017-03-01"><a href="#2017-03-01" class="headerlink" title="2017-03-01"></a>2017-03-01</h5><ul>
+<li>状态码 (信息类状态码、成功类状态码、重定向类状态码、服务器端错误状态码)</li>
+</ul>
+<hr>
+<p>做一个勤于思考的人~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/个人成长/前端资料总结.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1076,7 +1346,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1087,7 +1357,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
