@@ -259,6 +259,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/JS/new操作到底做了什么.html" itemprop="url">new操作到底做了什么</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T00:00:00+08:00">
+                2017-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/JS/new操作到底做了什么.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/JS/new操作到底做了什么.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-new操作做了哪些"><a href="#1-new操作做了哪些" class="headerlink" title="1. new操作做了哪些"></a>1. new操作做了哪些</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      a:<span class="number">1</span>,</span><br><span class="line">      b:<span class="number">2</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"> <span class="built_in">console</span>.log(f);</span><br></pre></td></tr></table></figure>
+<p>new调用函数（实例化）执行了5项操作</p>
+<h4 id="1-1-第一步：创建一个新的对象"><a href="#1-1-第一步：创建一个新的对象" class="headerlink" title="1.1 第一步：创建一个新的对象"></a>1.1 第一步：创建一个新的对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-第二步：创建原型链接"><a href="#1-2-第二步：创建原型链接" class="headerlink" title="1.2 第二步：创建原型链接"></a>1.2 第二步：创建原型链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f._proto_ = F.prototyte;</span><br><span class="line">f._proto_ === F.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-第三步：绑定this"><a href="#1-3-第三步：绑定this" class="headerlink" title="1.3 第三步：绑定this"></a>1.3 第三步：绑定this</h4><p>让F中的的this指向f上</p>
+<h4 id="1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性"><a href="#1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性" class="headerlink" title="1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性"></a>1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.name = <span class="literal">undefined</span>, </span><br><span class="line">   f.age = <span class="literal">undefined</span>,</span><br><span class="line">   f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-5-第五步：返回新对象"><a href="#1-5-第五步：返回新对象" class="headerlink" title="1.5 第五步：返回新对象"></a>1.5 第五步：返回新对象</h4><ul>
+<li>如果返回的对象是值类型，就丢弃，返回这个新对象<br> return 1;是无效的，控制台打印的是对象f</li>
+<li>如果是引用类型，这返回这个引用类型，取代新对象<br> return {a:1,b:2}会取代f</li>
+</ul>
+<h2 id="2-call、apply、bind"><a href="#2-call、apply、bind" class="headerlink" title="2. call、apply、bind"></a>2. call、apply、bind</h2><p>三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参</p>
+<h3 id="2-1-区别在于："><a href="#2-1-区别在于：" class="headerlink" title="2.1 区别在于："></a>2.1 区别在于：</h3><ul>
+<li>call和apply本质上功能一致，都是直接执行了，但是传参的方式不一样<ul>
+<li>obj.call(obj1,arg1,arg2),</li>
+<li>obj.apply(obj1,[arg1,arg2])</li>
+</ul>
+</li>
+<li>bind没有直接执行，而是返回一个函数，我们可以链式一直玩下去~</li>
+</ul>
+<h2 id="3-继承"><a href="#3-继承" class="headerlink" title="3. 继承"></a>3. 继承</h2><p>上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。<br>那么有几种方法可以让我们使用别的对象的方法和属性呢。</p>
+<ul>
+<li><p>看上面的new操作第四步做了什么，执行了构造函数里面的代码，相当于复制了一份，那么相当于可以使用F中的属性和方法了。<br>从这个层面上看，构造函数是实现继承的一个方式。</p>
+<ul>
+<li>问题是：如果每次继承父元素的属性和方法都得复制父元素的全部代码的话，似不似撒</li>
+<li>解决方法是什么，看new操作第二步干了什么，是的，<strong>proto</strong>属性指向了F的prototype，所以可以把F中通用的方法都移到F.prototype上，这就是传说中的基于原型的继承。</li>
+</ul>
+</li>
+<li><p>另一个关于继承的方法，是利用改变this指向实现的</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xx</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> xx(<span class="string">"我"</span>,<span class="string">"18"</span>);</span><br><span class="line">b.say();</span><br></pre></td></tr></table></figure>
+<p>看到了吗  b是从xx的实例，可是它居然能使用parson的say方法，可不就是继承吗   </p>
+<h2 id="4-小知识"><a href="#4-小知识" class="headerlink" title="4. 小知识"></a>4. 小知识</h2><h3 id="4-1-Object-create-了解"><a href="#4-1-Object-create-了解" class="headerlink" title="4.1 Object.create()了解"></a>4.1 Object.create()了解</h3><ul>
+<li>是es5的新特性</li>
+<li>有两个参数，第二个参数可选（描述性）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以看下object.create的实现</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;  <span class="comment">//定义了一个隐式的构造函数</span></span><br><span class="line">     F.prototype = o;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> F();  <span class="comment">//其实还是通过new来实现的</span></span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object.create(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">//创建一个很空的对象，他的原型都是空的，区别new object</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-proto-和prototype的区别"><a href="#4-2-proto-和prototype的区别" class="headerlink" title="4.2 _ proto _ 和prototype的区别"></a>4.2 _ proto _ 和prototype的区别</h3><ul>
+<li><p><strong>JS中对象</strong>:具有属性<strong>proto</strong>，可称为隐式原型，一个对象的隐式原型指向构造该对象的<strong>构造函数的原型</strong>，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
+</li>
+<li><p>函数是个特殊的对象，除了和其他对象一样有上述<em>proto</em>属性之外，还有自己特有的属性——<strong>原型属性（prototype)</strong>，这个属性是一个指针，指向一个函数的原型对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫constructor，这个属性包含了一个指针，指回原构造函数。        </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="built_in">console</span>.log(F.constructor === <span class="built_in">Function</span>);<span class="comment">//F的构造函数是Function</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(F.__proto__)<span class="comment">//F.__proto__指向构造函数Function的原型prototype:function()&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f.constructor === F);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__);<span class="comment">//f.__proto__指向构造函数F的原型:Object&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.prototype);<span class="comment">//prototype是方法的属性,f是个普通的对象,没有prototype属性</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>constructor：constructor不需要手动创建，它是对象原型上的一个属性。Object.prototype.constructor，返回一个<strong>指向创建了该对象原型的函数引用</strong>。需要注意的是，该属性的值是那个函数本身，该属性为只读。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对于上面的例子：</span></span><br><span class="line"><span class="built_in">console</span>.log(F.constructor)</span><br><span class="line"><span class="comment">//Function() &#123; [native code] &#125;</span></span><br><span class="line"> <span class="built_in">console</span>.log(f.constructor);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.name = name;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line">     <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-其他"><a href="#5-其他" class="headerlink" title="5. 其他"></a>5. 其他</h2><ul>
+<li>构造函数的首字母一般大写</li>
+<li>值类型赋值是值的复制</li>
+<li>对象类型的赋值不仅是值的复制也是引用的复制<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">b.push(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//a[1,2,3,4] b[1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">    b = a;<span class="comment">//值和引用都给了b</span></span><br><span class="line">    b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];<span class="comment">// a[1,2,3] b[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>做一个勤于思考的人</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/其他/gulp小白文.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1189,160 +1396,6 @@ entity-body
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/前端面试题/前端面试题-第二套.html" itemprop="url">前端面试题-第二套</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:10:00+08:00">
-                2017-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTML5学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">HTML5学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/前端面试题/前端面试题-第二套.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/前端面试题/前端面试题-第二套.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc"><a href="#1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc" class="headerlink" title="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc"></a>1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o<strong>3052202501</strong>;ptisp=ctc</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果配合其他的字符的话,可以知道,加粗的那个"3052202501"</span></span><br><span class="line"><span class="keyword">var</span> rg1 = <span class="regexp">/uin=o(\d&#123;10&#125;)/g</span>;</span><br><span class="line"><span class="keyword">var</span> match = rg1.exec(str);</span><br><span class="line"><span class="keyword">var</span> index = <span class="built_in">parseInt</span>(match.index)+<span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"匹配的字符串的位置在:"</span>+index);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"匹配到的字符串为:"</span>+match[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
-<h4 id="2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数"><a href="#2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数" class="headerlink" title="2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数"></a>2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">               <span class="keyword">var</span> length = str.length;</span><br><span class="line">               <span class="keyword">if</span>(length ==<span class="number">0</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">var</span> max = <span class="number">1</span>;</span><br><span class="line">               <span class="keyword">var</span> maxChar = str[<span class="number">0</span>];</span><br><span class="line">               <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">                   <span class="keyword">if</span>(str[i] <span class="keyword">in</span> obj)&#123;</span><br><span class="line">                       obj[str[i]] ++;</span><br><span class="line">                       <span class="keyword">if</span>(max &lt; obj[str[i]])&#123;</span><br><span class="line">                           max = obj[str[i]];</span><br><span class="line">                           maxChar = str[i];</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                       obj[str[i]] = <span class="number">1</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">              <span class="keyword">return</span> &#123;</span><br><span class="line">                  maxNum : max,</span><br><span class="line">                  maxChar :maxChar</span><br><span class="line">              &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7"><a href="#3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7" class="headerlink" title="3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7"></a>3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</h4><p>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。</p>
-<h4 id="4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集"><a href="#4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集" class="headerlink" title="4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集"></a>4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</h4><h4 id="5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。"><a href="#5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。" class="headerlink" title="5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。"></a>5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1395,7 +1448,7 @@ entity-body
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
