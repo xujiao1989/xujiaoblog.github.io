@@ -259,6 +259,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/04/Angular7表单.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/Angular7表单.html" itemprop="url">基于Angular7响应式表单实现一个简单的登录页面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T09:57:12+08:00">
+                2019-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular7/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular7</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/Angular7表单.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2019/04/Angular7表单.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="页面功能"><a href="#页面功能" class="headerlink" title="页面功能"></a>页面功能</h2><img src="/2019/04/Angular7表单/login.png" title="页面功能">
+<ul>
+<li>页面的基本排版如上</li>
+<li>基本功能：姓名为一个组件、密码为一个组件</li>
+<li>姓名：有默认值、同步校验（change时校验，错误提示在input右侧悬浮提示）、异步校验（blur时校验，错误提示在input底部出现）</li>
+<li>密码：同步校验</li>
+<li>提交时会重新对名称和密码再次校验</li>
+</ul>
+<h2 id="遇到的问题汇总"><a href="#遇到的问题汇总" class="headerlink" title="遇到的问题汇总"></a>遇到的问题汇总</h2><h3 id="Uncaught-Error-Template-parse-errors-Can’t-bind-to-‘formGroup’-since-it-isn’t-a-known-property-of-‘form’"><a href="#Uncaught-Error-Template-parse-errors-Can’t-bind-to-‘formGroup’-since-it-isn’t-a-known-property-of-‘form’" class="headerlink" title="Uncaught Error: Template parse errors:Can’t bind to ‘formGroup’ since it isn’t a known property of ‘form’."></a>Uncaught Error: Template parse errors:Can’t bind to ‘formGroup’ since it isn’t a known property of ‘form’.</h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>在Angular中要使用FormGroup属性，需要在app.module.ts中引入FormsModule、ReactiveFormsModule模块</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><img src="/2019/04/Angular7表单/2.png" title="Template parse errors解决方法">
+<h3 id="ERROR-Error-Cannot-find-control-with-unspecified-name-attribute-ERROR-TypeError-Cannot-create-property-‘validator’-on-string-‘loginName’"><a href="#ERROR-Error-Cannot-find-control-with-unspecified-name-attribute-ERROR-TypeError-Cannot-create-property-‘validator’-on-string-‘loginName’" class="headerlink" title="ERROR Error: Cannot find control with unspecified name attribute/ERROR TypeError: Cannot create property ‘validator’ on string ‘loginName’"></a>ERROR Error: Cannot find control with unspecified name attribute/ERROR TypeError: Cannot create property ‘validator’ on string ‘loginName’</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-item mt15"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"formLabel"</span>&gt;</span>登录名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-input"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">formControl</span>=<span class="string">"loginName"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginNameComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123; &#125;</span><br><span class="line">  loginName: FormControl</span><br><span class="line">  ngOnInit() &#123;</span><br><span class="line">    loginName: <span class="keyword">new</span> FormControl(<span class="string">'xujiao'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>修改为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-item mt15"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"formLabel"</span>&gt;</span>登录名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-input"</span> <span class="attr">type</span>=<span class="string">"text"</span> [<span class="attr">formControl</span>]=<span class="string">"loginName"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>去掉formCtrol外层的[]会报错：Cannot create property ‘validator’ on string ‘loginName’</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginNameComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123; &#125;</span><br><span class="line">  loginName: FormControl</span><br><span class="line">  ngOnInit() &#123;</span><br><span class="line">    <span class="keyword">this</span>.loginName = <span class="keyword">new</span> FormControl(<span class="string">'xujiao'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>this.loginName = new FormControl(‘xujiao’) 改成 loginName: new FormControl(‘xujiao’)会报错ERROR Error: Cannot find control with unspecified name attribute</li>
+</ul>
+<h2 id="响应式表单和模板驱动表单的区别"><a href="#响应式表单和模板驱动表单的区别" class="headerlink" title="响应式表单和模板驱动表单的区别"></a>响应式表单和模板驱动表单的区别</h2><p>在Angular7中存在</p>
+<h2 id="formGroup-和-formArray的区别"><a href="#formGroup-和-formArray的区别" class="headerlink" title="formGroup 和  formArray的区别"></a>formGroup 和  formArray的区别</h2><hr>
+<p>做个勤于思考的人~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/04/Angular7学习笔记.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -278,7 +451,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/Angular7学习笔记.html" itemprop="url">Angular表单 -- 学习记录</a></h1>
+                <a class="post-title-link" href="/2019/04/Angular7学习笔记.html" itemprop="url">Angular表单 -- FormControl、FormArray API走读</a></h1>
         
 
         <div class="post-meta">
@@ -313,8 +486,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
+                  <a href="/categories/Angular7/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular7</span>
                   </a>
                 </span>
 
@@ -692,7 +865,7 @@
 <h2 id="FormControl"><a href="#FormControl" class="headerlink" title="FormControl"></a>FormControl</h2><ul>
 <li>它和 FormGroup 和 FormArray 是 Angular 表单的三大基本构造块之一。 它扩展了 AbstractControl 类，并实现了关于访问值、验证状态、用户交互和事件的大部分基本功能。 </li>
 </ul>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class FormControl extends AbstractControl &#123;</span><br><span class="line">    constructor(</span><br><span class="line">        formState: any = null, </span><br><span class="line">        validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],</span><br><span class="line">        asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]</span><br><span class="line">    )</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FormControl</span> <span class="keyword">extends</span> <span class="title">AbstractControl</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(</span><br><span class="line">        formState: any = null, </span><br><span class="line">        validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],</span><br><span class="line">        asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]</span><br><span class="line">    )</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>参数<ul>
 <li>formState any:使用一个初始值或定义了初始值和禁用状态的对象初始化该控件。可选. 默认值是 null.</li>
@@ -1035,7 +1208,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="从表单数组中添加或删除控件"><a href="#从表单数组中添加或删除控件" class="headerlink" title="从表单数组中添加或删除控件"></a>从表单数组中添加或删除控件</h3><p>要改变数组中的控件列表，可以使用 FormArray 本身的 push、insert 或 removeAt 方法。这些方法能确保表单数组正确的跟踪这些子控件。 不要直接修改实例化 FormArray 时传入的那个 AbstractControl 数组，否则会导致奇怪的、非预期的行为，比如破坏变更检测机制。</p>
+<h3 id="FormGroup-和-FormArray-的区别"><a href="#FormGroup-和-FormArray-的区别" class="headerlink" title="FormGroup 和 FormArray 的区别"></a>FormGroup 和 FormArray 的区别</h3><h3 id="从表单数组中添加或删除控件"><a href="#从表单数组中添加或删除控件" class="headerlink" title="从表单数组中添加或删除控件"></a>从表单数组中添加或删除控件</h3><p>要改变数组中的控件列表，可以使用 FormArray 本身的 push、insert 或 removeAt 方法。这些方法能确保表单数组正确的跟踪这些子控件。 不要直接修改实例化 FormArray 时传入的那个 AbstractControl 数组，否则会导致奇怪的、非预期的行为，比如破坏变更检测机制。</p>
+<hr>
+<p>做个勤于思考的人~</p>
 
           
         
@@ -1613,266 +1788,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/03/2019学习总结.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/2019学习总结.html" itemprop="url">2019学习总结一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T13:08:22+08:00">
-                2019-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2019学习总结/" itemprop="url" rel="index">
-                    <span itemprop="name">2019学习总结</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/2019学习总结.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2019/03/2019学习总结.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="JS中数据类型有哪些？"><a href="#JS中数据类型有哪些？" class="headerlink" title="JS中数据类型有哪些？"></a>JS中数据类型有哪些？</h2><p>JS中数据类型：基本数据类型（原始类型）、引用类型（对象类型）</p>
-<ul>
-<li><p>基本数据类型：boolean、string、number、null、undefined、symbol（ES6）</p>
-</li>
-<li><p>引用类型：Object（Array、function、Date、Regex、）</p>
-</li>
-</ul>
-<h2 id="null-是对象嘛？"><a href="#null-是对象嘛？" class="headerlink" title="null 是对象嘛？"></a>null 是对象嘛？</h2><p>null不是对象，虽然typeof null 返回的是’Object’，这是js存在的一个bug。在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象，然而 null 表示为全零，所以将它错误的判断为 object 。</p>
-<h2 id="对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？"><a href="#对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？" class="headerlink" title="对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？"></a>对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？</h2><p>原始类型存储的是值，对象类型存储的是地址。函数参数是复制的副本，如果参数是对象的话，可能会对原有传入的对象的值产生影响。</p>
-<h2 id="typeof-是否能正确判断类型？instanceof-能正确判断对象的原理是什么？"><a href="#typeof-是否能正确判断类型？instanceof-能正确判断对象的原理是什么？" class="headerlink" title="typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？"></a>typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？</h2><blockquote>
-<p>typeof 并不能准确判断变量到底是什么类型，typeof是一个一元运算符，其返回值有7钟：number、string、boolean、undefined、symbol、object、function</p>
-</blockquote>
-<p>1、对于原始类型而言，除了null之外，typeof都能返回正确的值。null会返回object。<br>2、但是对于对象类型，除了函数外都返回object，函数返回function。</p>
-<blockquote>
-<p>instanceof：如果我们想判断一个<code>对象</code>的正确类型，这时候可以考虑使用 instanceof，因为内部机制是通过<code>原型链</code>来判断的。对于原始类型来说，你想直接通过 instanceof 来判断类型是不行的。</p>
-</blockquote>
-<ul>
-<li>instanceof 运算符要求其左边的运算数是一个对象，右边的运算数是对象类的名字或构造函数。</li>
-<li>本意是用来判断 A 是否为 B 的实例对象</li>
-<li>instanceof 返回值：true / false</li>
-<li>instanceof方法可以判断变量是否是数组类型，但是只限同一全局环境之内，在一个页面有多个iframe的情况下，instanceof失效。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>从原型链可以看出，[]的<strong>proto</strong>最终指向了Object.prototype，类似的new Date()、new Person() 也会形成这样一条原型链，因此，我们用 instanceof 也不能完全精确的判断object类的具体数据类型。</li>
-</ul>
-<h2 id="JavaScript类型转换"><a href="#JavaScript类型转换" class="headerlink" title="JavaScript类型转换"></a>JavaScript类型转换</h2><p>在JS中类型转换只有三种：转换为布尔值、转换为数字、转换为字符串</p>
-<img src="/2019/03/2019学习总结/1.png" title="类型转换说明">
-<ul>
-<li><p>对象转原始类型<br> 对象在转换类型的时候，会调用内置的 [[ToPrimitive]] 函数，对于该函数来说，算法逻辑一般来说如下：</p>
-<p> 如果已经是原始类型了，那就不需要转换了。<br> 调用 x.valueOf()，如果转换为基础类型，就返回转换的值<br> 调用 x.toString()，如果转换为基础类型，就返回转换的值<br> 如果都没有返回原始类型，就会报错<br> 当然你也可以重写 Symbol.toPrimitive ，该方法在转原始类型时调用优先级最高。</p>
-</li>
-<li><p>四则运算符</p>
-<ul>
-<li>运算中其中一方为字符串，那么就会把另一方也转换为字符串</li>
-<li>如果一方不是字符串或者数字，那么会将它转换为数字或者字符串</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span> + <span class="string">'1'</span> <span class="comment">// '11'</span></span><br><span class="line"><span class="literal">true</span> + <span class="literal">true</span> <span class="comment">// 2</span></span><br><span class="line"><span class="number">4</span> + [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] <span class="comment">// "41,2,3"</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>对于第一行代码来说，触发特点一，所以将数字 1 转换为字符串，得到结果 ‘11’</li>
-<li>对于第二行代码来说，触发特点二，所以将 true 转为数字 1</li>
-<li>对于第三行代码来说，触发特点二，所以将数组通过 toString 转为字符串 1,2,3，得到结果 41,2,3</li>
-</ul>
-<ul>
-<li><p>比较运算符</p>
-<ul>
-<li>如果是对象，就通过 toPrimitive 转换对象</li>
-<li>如果是字符串，就通过 unicode 字符索引来比较</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a.toPrimitive);</span><br><span class="line">a &gt; <span class="number">1</span> <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="string">'str1'</span>;</span><br><span class="line">b &gt; <span class="number">2</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>关于toPrimitive方法</p>
-</li>
-</ul>
-<p>在js中，想要将对象转换成原始值，必然会调用toPrimitive()内部函数，那么它是如何工作的呢？</p>
-<pre><code>toPrimitive(input,preferedType?)
-</code></pre><p>input是输入的值，preferedType是期望转换的类型，他可以是字符串，也可以是数字。你也可以省略preferedType，此时，日期会被认为是字符串，而其他的值会被当做Number。</p>
-<p>如果转换的类型是number，会执行以下步骤：</p>
-<pre><code>1. 如果input是原始值，直接返回这个值；
-
-2. 否则，如果input是对象，调用input.valueOf()，如果结果是原始值，返回结果；
-
-3. 否则，调用input.toString()。如果结果是原始值，返回结果；
-
-4. 否则，抛出错误。
-</code></pre><p>如果转换的类型是String，2和3会交换执行，即先执行toString()方法。</p>
-<p>你也可以省略preferedType，此时，日期会被认为是字符串，而其他的值会被当做Number。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*  1、[]是对象，调用valueOf()返回[]，不是原始值;</span></span><br><span class="line"><span class="comment">*   2、调用toString()，返回"",是原始值，返回“”</span></span><br><span class="line"><span class="comment">*   3、“” + “”，结果“”</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">[] + []  <span class="comment">// ""</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、&#123;&#125;是对象，调用valueOf()返回&#123;&#125;,不是原始值;</span></span><br><span class="line"><span class="comment">*   2、&#123;&#125;调用toString()，返回"[object Object]",是原始值</span></span><br><span class="line"><span class="comment">*   3、"[object Object]" + "[object Object]"，"[object Object][object Object]"</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#123;&#125; + &#123;&#125; <span class="comment">// "[object Object][object Object]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、[]是对象，调用valueOf()返回[]，不是原始值, 调用toString()，返回"",是原始值，返回“”</span></span><br><span class="line"><span class="comment">*   2、&#123;&#125;是对象，调用valueOf()返回&#123;&#125;,不是原始值;,&#123;&#125;调用toString()，返回"[object Object]",是原始值</span></span><br><span class="line"><span class="comment">*   3、[] + &#123;&#125; 相当于 “” + "[object Object]", 返回 "[object Object]"</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">[] + &#123;&#125; <span class="comment">// "[object Object]“</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、有的js解释器会将开头的 &#123;&#125; 看作一个代码块，而不是一个js对象，</span></span><br><span class="line"><span class="comment">*   2、于是真正参与运算的是+[]，就是将[]转换为number，于是得出答案0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#123;&#125; + [] <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、&#123;&#125;是对象，调用valueOf()返回&#123;&#125;,不是原始值;,&#123;&#125;调用toString()，返回"[object Object]",是原始值</span></span><br><span class="line"><span class="comment">*   2、[]是对象，调用valueOf()返回[]，不是原始值, 调用toString()，返回"",是原始值，返回“”</span></span><br><span class="line"><span class="comment">*   3、(&#123;&#125;) + [] 相当于 "[object Object]" + "", 返回 "[object Object]"</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">(&#123;&#125;) + [] <span class="comment">// "[object Object]“</span></span><br></pre></td></tr></table></figure>
-<h2 id="关于this"><a href="#关于this" class="headerlink" title="关于this"></a>关于this</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">foo() <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  foo: foo</span><br><span class="line">&#125;</span><br><span class="line">obj.foo() <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> foo() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>对于直接调用 foo 来说，不管 foo 函数被放在了什么地方，this 一定是 window</li>
-<li>对于 obj.foo() 来说，我们只需要记住，谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象</li>
-<li>对于 new 的方式来说，this 被永远绑定在了 c 上面，不会被任何方式改变 this</li>
-</ul>
-<p>说完了以上几种情况，其实很多代码中的 <code>this</code>应该就没什么问题了，下面让我们看看箭头函数中的<code>this</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a()()()) <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>首先箭头函数其实是没有 this 的，箭头函数中的 this 只取决包裹箭头函数的第一个普通函数的 this。在这个例子中，因为包裹箭头函数的第一个普通函数是 a，<code>所以此时的 this 是 window</code>。另外对箭头函数使用 bind 这类函数是无效的。</li>
-<li><p>最后种情况也就是 bind 这些改变上下文的 API 了，对于这些函数来说，this 取决于第一个参数，如果第一个参数为空，那么就是 window。</p>
-</li>
-<li><p>那么说到 bind，不知道大家是否考虑过，如果对一个函数进行多次 bind，那么上下文会是什么呢？</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>) &#125;</span><br><span class="line">fn.bind().bind(a)() <span class="comment">// =&gt; window</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>) &#125;</span><br><span class="line">fn.bind(a).bind()() <span class="comment">// =&gt; a &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// fn.bind().bind(a) 等于</span></span><br><span class="line"><span class="keyword">let</span> fn2 = <span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fn.apply()</span><br><span class="line">  &#125;.apply(a)</span><br><span class="line">&#125;</span><br><span class="line">fn2()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以从上述代码中发现，不管我们给函数 bind 几次，fn 中的 this 永远由第一次 bind 决定，所以结果永远是 window。</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>以上就是 this 的规则了，但是可能会发生多个规则同时出现的情况，这时候不同的规则之间会根据优先级最高的来决定 this 最终指向哪里。</li>
-<li>new 的方式优先级最高，接下来是 bind 这些函数，然后是 obj.foo() 这种调用方式，最后是 foo 这种调用方式，同时，箭头函数的 this 一旦被绑定，就不会再被任何方式所改变。</li>
-</ul>
-<img src="/2019/03/2019学习总结/2.png" title="this绑定优先级">
-<h2 id="new操作具体做了什么"><a href="#new操作具体做了什么" class="headerlink" title="new操作具体做了什么"></a>new操作具体做了什么</h2><ul>
-<li><a href="https://www.xujiaoblog.cn/2017/03/JS/new%E6%93%8D%E4%BD%9C%E5%88%B0%E5%BA%95%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88.html" target="_blank" rel="noopener">参考文章：new操作具体做了什么</a></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      a:<span class="number">1</span>,</span><br><span class="line">      b:<span class="number">2</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"> <span class="built_in">console</span>.log(f);</span><br></pre></td></tr></table></figure>
-<p>new调用函数（实例化）执行了5项操作</p>
-<p>1、 第一步：创建一个新的对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
-<p>2、 第二步：创建原型链接</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f._proto_ = F.prototyte;</span><br><span class="line">f._proto_ === F.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>3、 第三步：绑定this</p>
-<pre><code>让F中的的this指向f上
-</code></pre><p>4、 第四步：执行构造函数中的代码，也就是为新对象添加属性</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.name = <span class="literal">undefined</span>, </span><br><span class="line">f.age = <span class="literal">undefined</span>,</span><br><span class="line">f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>5、 第五步：返回新对象</p>
-<pre><code>+ 如果返回的对象是值类型，就丢弃，返回这个新对象: return 1;是无效的，控制台打印的是对象f
-+ 如果是引用类型，这返回这个引用类型，取代新对象: xreturn {a:1,b:2}会取代f
-</code></pre><hr>
-<p>做一个勤于思考的人</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1925,7 +1840,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1936,7 +1851,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1947,7 +1862,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

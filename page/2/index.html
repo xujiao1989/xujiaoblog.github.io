@@ -259,6 +259,266 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/03/2019学习总结.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/2019学习总结.html" itemprop="url">2019学习总结一</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T13:08:22+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/2019学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">2019学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/2019学习总结.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2019/03/2019学习总结.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="JS中数据类型有哪些？"><a href="#JS中数据类型有哪些？" class="headerlink" title="JS中数据类型有哪些？"></a>JS中数据类型有哪些？</h2><p>JS中数据类型：基本数据类型（原始类型）、引用类型（对象类型）</p>
+<ul>
+<li><p>基本数据类型：boolean、string、number、null、undefined、symbol（ES6）</p>
+</li>
+<li><p>引用类型：Object（Array、function、Date、Regex、）</p>
+</li>
+</ul>
+<h2 id="null-是对象嘛？"><a href="#null-是对象嘛？" class="headerlink" title="null 是对象嘛？"></a>null 是对象嘛？</h2><p>null不是对象，虽然typeof null 返回的是’Object’，这是js存在的一个bug。在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象，然而 null 表示为全零，所以将它错误的判断为 object 。</p>
+<h2 id="对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？"><a href="#对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？" class="headerlink" title="对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？"></a>对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？</h2><p>原始类型存储的是值，对象类型存储的是地址。函数参数是复制的副本，如果参数是对象的话，可能会对原有传入的对象的值产生影响。</p>
+<h2 id="typeof-是否能正确判断类型？instanceof-能正确判断对象的原理是什么？"><a href="#typeof-是否能正确判断类型？instanceof-能正确判断对象的原理是什么？" class="headerlink" title="typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？"></a>typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？</h2><blockquote>
+<p>typeof 并不能准确判断变量到底是什么类型，typeof是一个一元运算符，其返回值有7钟：number、string、boolean、undefined、symbol、object、function</p>
+</blockquote>
+<p>1、对于原始类型而言，除了null之外，typeof都能返回正确的值。null会返回object。<br>2、但是对于对象类型，除了函数外都返回object，函数返回function。</p>
+<blockquote>
+<p>instanceof：如果我们想判断一个<code>对象</code>的正确类型，这时候可以考虑使用 instanceof，因为内部机制是通过<code>原型链</code>来判断的。对于原始类型来说，你想直接通过 instanceof 来判断类型是不行的。</p>
+</blockquote>
+<ul>
+<li>instanceof 运算符要求其左边的运算数是一个对象，右边的运算数是对象类的名字或构造函数。</li>
+<li>本意是用来判断 A 是否为 B 的实例对象</li>
+<li>instanceof 返回值：true / false</li>
+<li>instanceof方法可以判断变量是否是数组类型，但是只限同一全局环境之内，在一个页面有多个iframe的情况下，instanceof失效。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>从原型链可以看出，[]的<strong>proto</strong>最终指向了Object.prototype，类似的new Date()、new Person() 也会形成这样一条原型链，因此，我们用 instanceof 也不能完全精确的判断object类的具体数据类型。</li>
+</ul>
+<h2 id="JavaScript类型转换"><a href="#JavaScript类型转换" class="headerlink" title="JavaScript类型转换"></a>JavaScript类型转换</h2><p>在JS中类型转换只有三种：转换为布尔值、转换为数字、转换为字符串</p>
+<img src="/2019/03/2019学习总结/1.png" title="类型转换说明">
+<ul>
+<li><p>对象转原始类型<br> 对象在转换类型的时候，会调用内置的 [[ToPrimitive]] 函数，对于该函数来说，算法逻辑一般来说如下：</p>
+<p> 如果已经是原始类型了，那就不需要转换了。<br> 调用 x.valueOf()，如果转换为基础类型，就返回转换的值<br> 调用 x.toString()，如果转换为基础类型，就返回转换的值<br> 如果都没有返回原始类型，就会报错<br> 当然你也可以重写 Symbol.toPrimitive ，该方法在转原始类型时调用优先级最高。</p>
+</li>
+<li><p>四则运算符</p>
+<ul>
+<li>运算中其中一方为字符串，那么就会把另一方也转换为字符串</li>
+<li>如果一方不是字符串或者数字，那么会将它转换为数字或者字符串</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span> + <span class="string">'1'</span> <span class="comment">// '11'</span></span><br><span class="line"><span class="literal">true</span> + <span class="literal">true</span> <span class="comment">// 2</span></span><br><span class="line"><span class="number">4</span> + [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] <span class="comment">// "41,2,3"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于第一行代码来说，触发特点一，所以将数字 1 转换为字符串，得到结果 ‘11’</li>
+<li>对于第二行代码来说，触发特点二，所以将 true 转为数字 1</li>
+<li>对于第三行代码来说，触发特点二，所以将数组通过 toString 转为字符串 1,2,3，得到结果 41,2,3</li>
+</ul>
+<ul>
+<li><p>比较运算符</p>
+<ul>
+<li>如果是对象，就通过 toPrimitive 转换对象</li>
+<li>如果是字符串，就通过 unicode 字符索引来比较</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a.toPrimitive);</span><br><span class="line">a &gt; <span class="number">1</span> <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="string">'str1'</span>;</span><br><span class="line">b &gt; <span class="number">2</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关于toPrimitive方法</p>
+</li>
+</ul>
+<p>在js中，想要将对象转换成原始值，必然会调用toPrimitive()内部函数，那么它是如何工作的呢？</p>
+<pre><code>toPrimitive(input,preferedType?)
+</code></pre><p>input是输入的值，preferedType是期望转换的类型，他可以是字符串，也可以是数字。你也可以省略preferedType，此时，日期会被认为是字符串，而其他的值会被当做Number。</p>
+<p>如果转换的类型是number，会执行以下步骤：</p>
+<pre><code>1. 如果input是原始值，直接返回这个值；
+
+2. 否则，如果input是对象，调用input.valueOf()，如果结果是原始值，返回结果；
+
+3. 否则，调用input.toString()。如果结果是原始值，返回结果；
+
+4. 否则，抛出错误。
+</code></pre><p>如果转换的类型是String，2和3会交换执行，即先执行toString()方法。</p>
+<p>你也可以省略preferedType，此时，日期会被认为是字符串，而其他的值会被当做Number。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*  1、[]是对象，调用valueOf()返回[]，不是原始值;</span></span><br><span class="line"><span class="comment">*   2、调用toString()，返回"",是原始值，返回“”</span></span><br><span class="line"><span class="comment">*   3、“” + “”，结果“”</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">[] + []  <span class="comment">// ""</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、&#123;&#125;是对象，调用valueOf()返回&#123;&#125;,不是原始值;</span></span><br><span class="line"><span class="comment">*   2、&#123;&#125;调用toString()，返回"[object Object]",是原始值</span></span><br><span class="line"><span class="comment">*   3、"[object Object]" + "[object Object]"，"[object Object][object Object]"</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#123;&#125; + &#123;&#125; <span class="comment">// "[object Object][object Object]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、[]是对象，调用valueOf()返回[]，不是原始值, 调用toString()，返回"",是原始值，返回“”</span></span><br><span class="line"><span class="comment">*   2、&#123;&#125;是对象，调用valueOf()返回&#123;&#125;,不是原始值;,&#123;&#125;调用toString()，返回"[object Object]",是原始值</span></span><br><span class="line"><span class="comment">*   3、[] + &#123;&#125; 相当于 “” + "[object Object]", 返回 "[object Object]"</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">[] + &#123;&#125; <span class="comment">// "[object Object]“</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、有的js解释器会将开头的 &#123;&#125; 看作一个代码块，而不是一个js对象，</span></span><br><span class="line"><span class="comment">*   2、于是真正参与运算的是+[]，就是将[]转换为number，于是得出答案0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#123;&#125; + [] <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  1、&#123;&#125;是对象，调用valueOf()返回&#123;&#125;,不是原始值;,&#123;&#125;调用toString()，返回"[object Object]",是原始值</span></span><br><span class="line"><span class="comment">*   2、[]是对象，调用valueOf()返回[]，不是原始值, 调用toString()，返回"",是原始值，返回“”</span></span><br><span class="line"><span class="comment">*   3、(&#123;&#125;) + [] 相当于 "[object Object]" + "", 返回 "[object Object]"</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">(&#123;&#125;) + [] <span class="comment">// "[object Object]“</span></span><br></pre></td></tr></table></figure>
+<h2 id="关于this"><a href="#关于this" class="headerlink" title="关于this"></a>关于this</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">foo() <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">2</span>,</span><br><span class="line">  foo: foo</span><br><span class="line">&#125;</span><br><span class="line">obj.foo() <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> foo() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于直接调用 foo 来说，不管 foo 函数被放在了什么地方，this 一定是 window</li>
+<li>对于 obj.foo() 来说，我们只需要记住，谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象</li>
+<li>对于 new 的方式来说，this 被永远绑定在了 c 上面，不会被任何方式改变 this</li>
+</ul>
+<p>说完了以上几种情况，其实很多代码中的 <code>this</code>应该就没什么问题了，下面让我们看看箭头函数中的<code>this</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a()()()) <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>首先箭头函数其实是没有 this 的，箭头函数中的 this 只取决包裹箭头函数的第一个普通函数的 this。在这个例子中，因为包裹箭头函数的第一个普通函数是 a，<code>所以此时的 this 是 window</code>。另外对箭头函数使用 bind 这类函数是无效的。</li>
+<li><p>最后种情况也就是 bind 这些改变上下文的 API 了，对于这些函数来说，this 取决于第一个参数，如果第一个参数为空，那么就是 window。</p>
+</li>
+<li><p>那么说到 bind，不知道大家是否考虑过，如果对一个函数进行多次 bind，那么上下文会是什么呢？</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>) &#125;</span><br><span class="line">fn.bind().bind(a)() <span class="comment">// =&gt; window</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>) &#125;</span><br><span class="line">fn.bind(a).bind()() <span class="comment">// =&gt; a &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// fn.bind().bind(a) 等于</span></span><br><span class="line"><span class="keyword">let</span> fn2 = <span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fn.apply()</span><br><span class="line">  &#125;.apply(a)</span><br><span class="line">&#125;</span><br><span class="line">fn2()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以从上述代码中发现，不管我们给函数 bind 几次，fn 中的 this 永远由第一次 bind 决定，所以结果永远是 window。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>以上就是 this 的规则了，但是可能会发生多个规则同时出现的情况，这时候不同的规则之间会根据优先级最高的来决定 this 最终指向哪里。</li>
+<li>new 的方式优先级最高，接下来是 bind 这些函数，然后是 obj.foo() 这种调用方式，最后是 foo 这种调用方式，同时，箭头函数的 this 一旦被绑定，就不会再被任何方式所改变。</li>
+</ul>
+<img src="/2019/03/2019学习总结/2.png" title="this绑定优先级">
+<h2 id="new操作具体做了什么"><a href="#new操作具体做了什么" class="headerlink" title="new操作具体做了什么"></a>new操作具体做了什么</h2><ul>
+<li><a href="https://www.xujiaoblog.cn/2017/03/JS/new%E6%93%8D%E4%BD%9C%E5%88%B0%E5%BA%95%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88.html" target="_blank" rel="noopener">参考文章：new操作具体做了什么</a></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      a:<span class="number">1</span>,</span><br><span class="line">      b:<span class="number">2</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"> <span class="built_in">console</span>.log(f);</span><br></pre></td></tr></table></figure>
+<p>new调用函数（实例化）执行了5项操作</p>
+<p>1、 第一步：创建一个新的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<p>2、 第二步：创建原型链接</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f._proto_ = F.prototyte;</span><br><span class="line">f._proto_ === F.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>3、 第三步：绑定this</p>
+<pre><code>让F中的的this指向f上
+</code></pre><p>4、 第四步：执行构造函数中的代码，也就是为新对象添加属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.name = <span class="literal">undefined</span>, </span><br><span class="line">f.age = <span class="literal">undefined</span>,</span><br><span class="line">f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5、 第五步：返回新对象</p>
+<pre><code>+ 如果返回的对象是值类型，就丢弃，返回这个新对象: return 1;是无效的，控制台打印的是对象f
++ 如果是引用类型，这返回这个引用类型，取代新对象: xreturn {a:1,b:2}会取代f
+</code></pre><hr>
+<p>做一个勤于思考的人</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/03/Mac常用快捷键.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1111,192 +1371,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/CSS/css实现垂直居中.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/CSS/css实现垂直居中.html" itemprop="url">css实现垂直居中</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T00:00:00+08:00">
-                2017-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/CSS/css实现垂直居中.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/CSS/css实现垂直居中.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-方法一（inline-inline-block配合vertical-align）"><a href="#1-方法一（inline-inline-block配合vertical-align）" class="headerlink" title="1. 方法一（inline/inline-block配合vertical-align）"></a>1. 方法一（inline/inline-block配合vertical-align）</h2><p>这种方法应用于子元素都是inline/inline-block level的元素，可以使用vertical-align属性，兼容IE6+ 如果原本元素不是inline level的话，使用display:inline-block兼容到IE8+</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>我是内容我是内容我是内容</span><br><span class="line">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"con"</span> <span class="attr">src</span>=<span class="string">"/images/csstest1.png"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"con"</span> <span class="attr">src</span>=<span class="string">"/images/csstest1.png"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>根据上面的例子我们可以得到以下所示的样式</p>
-<p><img src="/images/csstest1.PNG" alt="css垂直居中示例图1"></p>
-<p>在这里，span/img都是行内元素，我们可以采用vertical-align实现垂直居中。上面默认情况下，vertical-align是基于基线对其的。</p>
-<p>对于上面的例子，我们也可以对span设置display:inline-block属性，设置高宽后，可以做到span中任意内容的居中效果</p>
-<h2 id="2-方法二（table-cell配合vertical-align）"><a href="#2-方法二（table-cell配合vertical-align）" class="headerlink" title="2.方法二（table-cell配合vertical-align）"></a>2.方法二（table-cell配合vertical-align）</h2><p>使用display:tabel-cell，table-cell也是可以使用vertical-align：middle使得元素垂直居中，但是display:table-cell有兼容性问题，兼容IE8+</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>这是第二个内容这是<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">display</span>: table-cell;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>根据上面的例子我们可以得到以下所示的样式</p>
-<p><img src="/images/csstest2.PNG" alt="css垂直居中示例图2"></p>
-<p>这里需要注意的是table-cell设置需要设置在父元素上保证其内容垂直居中，如果你希望con中的文字也居中现在，也可以对con添加上<code>display: table-cell;vertical-align: middle;</code>。为什么没有line-height。line-height对多行文本的垂直居中实现效果并不是很好</p>
-<ul>
-<li>兼容性：IE6/7不兼容display:table-cell。</li>
-<li>自适应：子容器无法自适应于父容器，高度无法使用百分比单位，因为根据渲染规则，display:table-cell的元素的包含块是它父级的display:table的元素。溢出：父元素就算给定高度，设置overflow，也不会导致溢出隐藏；在子元素溢出的时候，父容器不能保有自身设置的高度，直接会被撑高。</li>
-<li>其他：display:table-cell本身让很多属性无效。</li>
-</ul>
-<h2 id="3-方法三：（position-absolute来实现）–不兼容IE6-7"><a href="#3-方法三：（position-absolute来实现）–不兼容IE6-7" class="headerlink" title="3. 方法三：（position:absolute来实现）–不兼容IE6/7"></a>3. 方法三：（position:absolute来实现）–不兼容IE6/7</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>这是第二个内容这是<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>利用position：absolute如何保证con始终在parent的中心位置。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">140px</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">70%</span>;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/csstest3.PNG" alt="css垂直居中示例图3"></p>
-<p>我们经常使用margin:0 auto使得块级元素水平居中。这里<code>position: absolute; top:0;bottom:0;left:0;right: 0;</code>的作用是什么，如果我们把这个删除了，可以发现原生con是水平居中了，在垂直方向上没有生效，这是为什么？？</p>
-<p>原理是：<br>‘top’ + ‘margin-top’ + ‘border-top-width’ + ‘padding-top’ + ‘height’ + ‘padding-bottom’ + ‘border-bottom-width’ + ‘margin-bottom’ + ‘bottom’ = 包含块的高度。</p>
-<h2 id="4-子容器绝对定位，top-50-，负margin（兼容IE6-）"><a href="#4-子容器绝对定位，top-50-，负margin（兼容IE6-）" class="headerlink" title="4. 子容器绝对定位，top:50%，负margin（兼容IE6+）"></a>4. 子容器绝对定位，top:50%，负margin（兼容IE6+）</h2><p>要求子元素定高</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>这是第二个内容这是<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">140px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">140px</span>;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">70px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/csstest4.PNG" alt="css垂直居中示例图4"></p>
-<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5. 参考文章"></a>5. 参考文章</h2><ul>
-<li><a href="http://www.imooc.com/u/197450/courses?sort=publish" target="_blank" rel="noopener">张鑫旭的深入理解CSS系列</a></li>
-<li><a href="https://segmentfault.com/a/1190000000381042" target="_blank" rel="noopener">子容器垂直居中于父容器的方案</a></li>
-<li><a href="https://segmentfault.com/q/1010000000343188#a-1020000000343394" target="_blank" rel="noopener">子容器超过父容器如何垂直居中</a></li>
-</ul>
-<hr>
-<p>做一个勤于思考的人</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1349,7 +1423,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1360,7 +1434,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1371,7 +1445,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
