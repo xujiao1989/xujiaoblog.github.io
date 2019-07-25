@@ -259,6 +259,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/04/前端自动化测试流程学习总结.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/前端自动化测试流程学习总结.html" itemprop="url">深入浅出前端自动化测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T19:34:45+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/前端自动化测试流程学习总结.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2019/04/前端自动化测试流程学习总结.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="撰写本文的原因和目标"><a href="#撰写本文的原因和目标" class="headerlink" title="撰写本文的原因和目标"></a>撰写本文的原因和目标</h2><h4 id="1、-原因"><a href="#1、-原因" class="headerlink" title="1、 原因"></a>1、 原因</h4><ul>
+<li>最近团队一直在讨论如何保证前端代码质量，如何降低现网的问题数。除了编码规范及质量外，另一个重要的部分就是前端自动化测试。</li>
+<li>虽然之前也接触过一些，但是没有深入了解过这一块的知识点，通过学习总结的方式加深对这一块的理解。</li>
+<li>之前看到一个好代码的标准，其中有一条就是代码是可测试的。</li>
+</ul>
+<h4 id="2、目标"><a href="#2、目标" class="headerlink" title="2、目标"></a>2、目标</h4><ul>
+<li>本文对于开发人员来讲是浅显易懂的，如果有讲的不清楚的地方欢迎给我提意见。</li>
+<li>通过本文能够对前端的自动化测试的过程、工具有基本的了解，并且能够自己在项目中编写。</li>
+</ul>
+<h2 id="常见的基本概念"><a href="#常见的基本概念" class="headerlink" title="常见的基本概念"></a>常见的基本概念</h2><p>软件开发中完整的测试流程包括：UT、IT、ST、UAT</p>
+<ul>
+<li>UT（单元测试）：unit test  </li>
+<li>IT（集成测试）：system integration test</li>
+<li>ST（系统测试）：system test</li>
+<li>UAT（用户接受测试/验收测试）: user acceptance test</li>
+</ul>
+<p>而每一块测试的主要侧重点不一样。</p>
+<p>我们在前端开发阶段需要考虑的比较多的是：单元测试、集成测试。</p>
+<h4 id="1、单元测试UT"><a href="#1、单元测试UT" class="headerlink" title="1、单元测试UT"></a>1、单元测试UT</h4><ul>
+<li><p>单元测试的概念：</p>
+<p> 单元测试是针对<code>程序的最小单元</code>来进行正确性检验的测试工作。程序单元是应用的最小可测试部件。一个单元可能是单个程序、类、对象、方法等。 ——维基百科</p>
+<p> 更简单一点来说，单元测试就是为了保证我们编写的每一个函数的正确性。<br><br></p>
+</li>
+<li><p>单元测试的主要任务是：</p>
+<ul>
+<li>模块接口测试；</li>
+<li>模块局部数据结构测试；</li>
+<li>模块边界条件测试；</li>
+<li>模块中所有独立执行通路测试；</li>
+<li>模块的各条错误处理通路测试；<br><br></li>
+</ul>
+</li>
+<li><p>单元测试的意义：</p>
+<p>  我们一直都在讨论好的代码是什么样子的，网上也给出了很多答案，其中有一条就是<code>写出的代码要是可测试的</code>。编写可测试的代码意味着我们需要注意: 功能代码拆分抽象规模更小、功能独立、降低业务耦合度；在写代码时考虑各种边界条件、极限情况。这样做的意义在于：</p>
+<ul>
+<li>功能细粒化，各个部件功能互不打扰，修改起来引入bug可能性减小，也提高代码可维护性</li>
+<li>对各个部件的边界极限条件进行测试，提高代码质量</li>
+<li>可以快速定位bug</li>
+<li>细粒化的功能部件使得我们重构扩展业务变得更加轻松</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、集成测试IT"><a href="#2、集成测试IT" class="headerlink" title="2、集成测试IT"></a>2、集成测试IT</h4><p>单元测试主要针对单个的函数单元进行验证的，而集成测试是将个个业务逻辑连起来验证，可能会整合了若干的单元测试。这种测试方式更多的是黑盒测试。</p>
+<h2 id="前端自动化测试工具调研"><a href="#前端自动化测试工具调研" class="headerlink" title="前端自动化测试工具调研"></a>前端自动化测试工具调研</h2><h2 id="如果写一个单元测试"><a href="#如果写一个单元测试" class="headerlink" title="如果写一个单元测试"></a>如果写一个单元测试</h2><h2 id="如何在前端项目完成集测试"><a href="#如何在前端项目完成集测试" class="headerlink" title="如何在前端项目完成集测试"></a>如何在前端项目完成集测试</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.cnblogs.com/shuaiandjun/p/8491686.html" target="_blank" rel="noopener">软件开发中的完整测试所包括的环节</a></li>
+<li><a href="https://segmentfault.com/a/1190000006736224" target="_blank" rel="noopener">谈谈为什么写单元测试</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/03/2019学习总结.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1176,201 +1374,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/JS/原生js实现class筛选器.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/JS/原生js实现class筛选器.html" itemprop="url">原生js实现class筛选器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
-                2017-03-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/JS/原生js实现class筛选器.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/JS/原生js实现class筛选器.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>可以从<a href="http://caniuse.com/" target="_blank" rel="noopener">can i use</a>网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。</p>
-<h2 id="1-思考"><a href="#1-思考" class="headerlink" title="1. 思考"></a>1. 思考</h2><ol>
-<li><p>我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); </p>
-<ul>
-<li>classname为我们要筛选的class值，数组类型，如[“tab”,”tab-item”]</li>
-<li>parentId为父元素的id，可选参数</li>
-<li>tagname为标签名，可选参数</li>
-<li>返回一个包含匹配成功的节点的数组</li>
-</ul>
-</li>
-<li><p>尽可能多的使用已经存在的方法</p>
-<ul>
-<li>getElementsByTagName</li>
-<li>getElementById</li>
-</ul>
-</li>
-</ol>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><ol>
-<li>获取到符合要求的dom节点（node下的tag），是一个HTML Collection，是一个类数组，length属性缓存下来，查找代价比较大</li>
-<li>我们获取到dom节点的className通常是一个string类型的。并且class容许顺序不一致。如“tab tab-item tab-active”与”tab tab-active tab-item”可以匹配的一样的css规则</li>
-<li>我们使用正则匹配，将className拆成多个className正则。因为我们匹配css时需要每个className都必须匹配通过。（拆开也是因为class书写可以无序）</li>
-<li>dom节点的className进行正则匹配，通过所有匹配的则返回该节点</li>
-</ol>
-<h2 id="3-实现和效果"><a href="#3-实现和效果" class="headerlink" title="3. 实现和效果"></a>3. 实现和效果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElementsByClassName</span>(<span class="params">classname,parentId,tag</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> parentNode = parentId &amp;&amp; <span class="built_in">document</span>.getElementById(parentId) || <span class="built_in">document</span>,</span><br><span class="line">            tagName = tag || <span class="string">'*'</span>,</span><br><span class="line">            classLength = classname.length,<span class="comment">//获取我们需要筛选class的个数</span></span><br><span class="line">            classReg = [];<span class="comment">//匹配class的正则</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;classLength;i++)&#123;</span><br><span class="line">        classReg[i] = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span>+classname[i]+<span class="string">"(\\s|$)"</span>,<span class="string">"g"</span>);<span class="comment">//生成class匹配正则</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> elems = parentNode.getElementsByTagName(tagName),<span class="comment">//获取到所有满足要求的dom节点</span></span><br><span class="line">            elemLength = elems.length,<span class="comment">//elems是类数组，获取length属性代价比较大，所以缓存下来 3</span></span><br><span class="line">            result = [];<span class="comment">//用于保存匹配成功的节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>;j &lt; elemLength;j++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> elemTest = elems[j],<span class="comment">//获取当前测试的节点</span></span><br><span class="line">                elemTestClassName = elemTest.className;<span class="comment">//获取当前测试节点的class属性，className兼容IE6+</span></span><br><span class="line">        <span class="comment">//接下来开始对elemTestClassName进行匹配，看它是否匹配classReg中所有的规则</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(classReg[k] &amp;&amp; (classReg[k].test(elemTestClassName)))&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(classReg[k]+<span class="string">":"</span>+elemTestClassName+<span class="string">":"</span>+(classReg[k].test(elemTestClassName)));</span><br><span class="line">            <span class="comment">//测试成功进来</span></span><br><span class="line">            <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">                result[result.length] = elemTest;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-问题总结"><a href="#4-问题总结" class="headerlink" title="4. 问题总结"></a>4. 问题总结</h2><h4 id="4-1-关于while-循环的问题"><a href="#4-1-关于while-循环的问题" class="headerlink" title="4.1 关于while{}循环的问题"></a>4.1 关于while{}循环的问题</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(classReg[k].test(elemTestClassName))&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(classReg[k]+<span class="string">":"</span>+elemTestClassName+<span class="string">":"</span>+(classReg[k].test(elemTestClassName)));</span><br><span class="line">    <span class="comment">//测试成功进来</span></span><br><span class="line">    <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">        result[result.length] = elemTest;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的逻辑在执行过程中报错了<code>Uncaught TypeError: Cannot read property &#39;test&#39; of undefined</code>，原因在于，循环结束时while还是执行一遍classReg[k].test(elemTestClassName)，而此时classReg[k]已经是undefined了。<br>所以应该在while加上判断</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(classReg[k] &amp;&amp; classReg[k].test(elemTestClassName))&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(classReg[k]+<span class="string">":"</span>+elemTestClassName+<span class="string">":"</span>+(classReg[k].test(elemTestClassName)));</span><br><span class="line">    <span class="comment">//测试成功进来</span></span><br><span class="line">    <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">        result[result.length] = elemTest;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-2-实例"><a href="#4-2-实例" class="headerlink" title="4.2 实例"></a>4.2 实例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"aaa zzz ccc"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span> <span class="attr">class</span>=<span class="string">"aaa    bbb   ccc"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span> <span class="attr">class</span>=<span class="string">"aaa ccc bbb"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>当我们使用上面的方法时会出现一个奇怪的现象，我现在还没搞明白，生气~~~</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = getElementsByClassName([<span class="string">"aaa"</span>,<span class="string">"ccc"</span>],<span class="built_in">document</span>,<span class="string">"div"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
-<p>看到while循环体中的<code>console.log(classReg[k]+&quot;:&quot;+elemTestClassName+&quot;:&quot;+(classReg[k].test(elemTestClassName)))</code>了吗？加上这个console时，就能正确打印出两个dom节点[div#div1.aaa.bbb.ccc, div#div2.aaa.ccc.bbb]，注释掉的话，就只能找到[div#div1.aaa.bbb.ccc]。已疯！！！</p>
-<h2 id="5-关于上面问题的解决"><a href="#5-关于上面问题的解决" class="headerlink" title="5. 关于上面问题的解决"></a>5. 关于上面问题的解决</h2><p>非常感谢小宁宝宝的推荐，一个人思考真的容易陷入死胡同。</p>
-<p>因为我在实例化正则的时候，加了全局标志“g”,那么第一次查找成功后，下一次匹配就从成功后的位置开始。而我的console里面改变了lastIndex的值，所以解决方案有两个</p>
-<ol>
-<li>删除全局标志“g”。这是最根本的原因</li>
-<li>不删除的话，那么就手动将每次的lastIndex置为0</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(classReg[k] &amp;&amp; (classReg[k].test(elemTestClassName)))&#123;</span><br><span class="line">  <span class="comment">// console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)));</span></span><br><span class="line">    classReg[k].lastIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//测试成功进来</span></span><br><span class="line">    <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">        result[result.length] = elemTest;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="6-推荐阅读："><a href="#6-推荐阅读：" class="headerlink" title="6. 推荐阅读："></a>6. 推荐阅读：</h2><ul>
-<li><a href="http://stackoverflow.com/questions/13586786/regexp-test-returns-different-result-for-same-str-depending-on-how-where-i" target="_blank" rel="noopener">RegExp.test() returns different result for same str</a></li>
-<li><a href="http://www.365mini.com/page/javascript-regexp-test.htm" target="_blank" rel="noopener">JavaScript RegExp.test() 函数详解</a></li>
-</ul>
-<hr>
-<p>做一个勤于思考的人</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1423,7 +1426,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1434,7 +1437,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
