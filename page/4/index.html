@@ -259,6 +259,415 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/JS/new操作到底做了什么.html" itemprop="url">new操作到底做了什么</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T00:00:00+08:00">
+                2017-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/JS/new操作到底做了什么.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/JS/new操作到底做了什么.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-new操作做了哪些"><a href="#1-new操作做了哪些" class="headerlink" title="1. new操作做了哪些"></a>1. new操作做了哪些</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      a:<span class="number">1</span>,</span><br><span class="line">      b:<span class="number">2</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"> <span class="built_in">console</span>.log(f);</span><br></pre></td></tr></table></figure>
+<p>new调用函数（实例化）执行了5项操作</p>
+<h4 id="1-1-第一步：创建一个新的对象"><a href="#1-1-第一步：创建一个新的对象" class="headerlink" title="1.1 第一步：创建一个新的对象"></a>1.1 第一步：创建一个新的对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-第二步：创建原型链接"><a href="#1-2-第二步：创建原型链接" class="headerlink" title="1.2 第二步：创建原型链接"></a>1.2 第二步：创建原型链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f._proto_ = F.prototyte;</span><br><span class="line">f._proto_ === F.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-第三步：绑定this"><a href="#1-3-第三步：绑定this" class="headerlink" title="1.3 第三步：绑定this"></a>1.3 第三步：绑定this</h4><p>让F中的的this指向f上</p>
+<h4 id="1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性"><a href="#1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性" class="headerlink" title="1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性"></a>1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.name = <span class="literal">undefined</span>, </span><br><span class="line">   f.age = <span class="literal">undefined</span>,</span><br><span class="line">   f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-5-第五步：返回新对象"><a href="#1-5-第五步：返回新对象" class="headerlink" title="1.5 第五步：返回新对象"></a>1.5 第五步：返回新对象</h4><ul>
+<li>如果返回的对象是值类型，就丢弃，返回这个新对象<br> return 1;是无效的，控制台打印的是对象f</li>
+<li>如果是引用类型，这返回这个引用类型，取代新对象<br> return {a:1,b:2}会取代f</li>
+</ul>
+<h2 id="2-call、apply、bind"><a href="#2-call、apply、bind" class="headerlink" title="2. call、apply、bind"></a>2. call、apply、bind</h2><p>三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参</p>
+<h3 id="2-1-区别在于："><a href="#2-1-区别在于：" class="headerlink" title="2.1 区别在于："></a>2.1 区别在于：</h3><ul>
+<li>call和apply本质上功能一致，都是直接执行了，但是传参的方式不一样<ul>
+<li>obj.call(obj1,arg1,arg2),</li>
+<li>obj.apply(obj1,[arg1,arg2])</li>
+</ul>
+</li>
+<li>bind没有直接执行，而是返回一个函数，我们可以链式一直玩下去~</li>
+</ul>
+<h2 id="3-继承"><a href="#3-继承" class="headerlink" title="3. 继承"></a>3. 继承</h2><p>上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。<br>那么有几种方法可以让我们使用别的对象的方法和属性呢。</p>
+<ul>
+<li><p>看上面的new操作第四步做了什么，执行了构造函数里面的代码，相当于复制了一份，那么相当于可以使用F中的属性和方法了。<br>从这个层面上看，构造函数是实现继承的一个方式。</p>
+<ul>
+<li>问题是：如果每次继承父元素的属性和方法都得复制父元素的全部代码的话，似不似撒</li>
+<li>解决方法是什么，看new操作第二步干了什么，是的，<strong>proto</strong>属性指向了F的prototype，所以可以把F中通用的方法都移到F.prototype上，这就是传说中的基于原型的继承。</li>
+</ul>
+</li>
+<li><p>另一个关于继承的方法，是利用改变this指向实现的</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xx</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> xx(<span class="string">"我"</span>,<span class="string">"18"</span>);</span><br><span class="line">b.say();</span><br></pre></td></tr></table></figure>
+<p>看到了吗  b是从xx的实例，可是它居然能使用parson的say方法，可不就是继承吗   </p>
+<h2 id="4-小知识"><a href="#4-小知识" class="headerlink" title="4. 小知识"></a>4. 小知识</h2><h3 id="4-1-Object-create-了解"><a href="#4-1-Object-create-了解" class="headerlink" title="4.1 Object.create()了解"></a>4.1 Object.create()了解</h3><ul>
+<li>是es5的新特性</li>
+<li>有两个参数，第二个参数可选（描述性）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以看下object.create的实现</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;  <span class="comment">//定义了一个隐式的构造函数</span></span><br><span class="line">     F.prototype = o;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> F();  <span class="comment">//其实还是通过new来实现的</span></span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object.create(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">//创建一个很空的对象，他的原型都是空的，区别new object</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-2-proto-和prototype的区别"><a href="#4-2-proto-和prototype的区别" class="headerlink" title="4.2 _ proto _ 和prototype的区别"></a>4.2 _ proto _ 和prototype的区别</h3><ul>
+<li><p><strong>JS中对象</strong>:具有属性<strong>proto</strong>，可称为隐式原型，一个对象的隐式原型指向构造该对象的<strong>构造函数的原型</strong>，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
+</li>
+<li><p>函数是个特殊的对象，除了和其他对象一样有上述<em>proto</em>属性之外，还有自己特有的属性——<strong>原型属性（prototype)</strong>，这个属性是一个指针，指向一个函数的原型对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫constructor，这个属性包含了一个指针，指回原构造函数。        </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="built_in">console</span>.log(F.constructor === <span class="built_in">Function</span>);<span class="comment">//F的构造函数是Function</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(F.__proto__)<span class="comment">//F.__proto__指向构造函数Function的原型prototype:function()&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f.constructor === F);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__);<span class="comment">//f.__proto__指向构造函数F的原型:Object&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.prototype);<span class="comment">//prototype是方法的属性,f是个普通的对象,没有prototype属性</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>constructor：constructor不需要手动创建，它是对象原型上的一个属性。Object.prototype.constructor，返回一个<strong>指向创建了该对象原型的函数引用</strong>。需要注意的是，该属性的值是那个函数本身，该属性为只读。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对于上面的例子：</span></span><br><span class="line"><span class="built_in">console</span>.log(F.constructor)</span><br><span class="line"><span class="comment">//Function() &#123; [native code] &#125;</span></span><br><span class="line"> <span class="built_in">console</span>.log(f.constructor);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.name = name;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line">     <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-其他"><a href="#5-其他" class="headerlink" title="5. 其他"></a>5. 其他</h2><ul>
+<li>构造函数的首字母一般大写</li>
+<li>值类型赋值是值的复制</li>
+<li>对象类型的赋值不仅是值的复制也是引用的复制<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">b.push(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//a[1,2,3,4] b[1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">    b = a;<span class="comment">//值和引用都给了b</span></span><br><span class="line">    b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];<span class="comment">// a[1,2,3] b[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>做一个勤于思考的人</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/其他/gulp小白文.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/其他/gulp小白文.html" itemprop="url">gulp小白文</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:00:00+08:00">
+                2017-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/其他/gulp小白文.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/其他/gulp小白文.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-关于gulp"><a href="#1-关于gulp" class="headerlink" title="1. 关于gulp"></a>1. 关于gulp</h2><h3 id="1-1-gulp是什么"><a href="#1-1-gulp是什么" class="headerlink" title="1.1 gulp是什么"></a>1.1 gulp是什么</h3><p>gulp是一款提高我们开发效率的工具。比如：</p>
+<ul>
+<li>自动帮我们添加浏览器兼容前缀</li>
+<li>自动刷新浏览器</li>
+<li>我们想要使用ES6，gulp还可以帮我们把ES6代码编译转换成浏览器可以用的js</li>
+</ul>
+<p>而这一切并不是gulp本身完成的，而是一系列的gulp插件来帮忙完成的。</p>
+<h3 id="1-2-gulp环境简单配置"><a href="#1-2-gulp环境简单配置" class="headerlink" title="1.2 gulp环境简单配置"></a>1.2 gulp环境简单配置</h3><ul>
+<li>首先你得有node环境（去下载node并安装好，内置了npm包管理工具）</li>
+<li><p>切到工程目录下，npm init 根据提示初始化package.json文件，如下图所示操作，会在项目目录下生成一个package.json文件(package.json文件也可以手动添加)</p>
+<p>  <img src="..//images/gulp1.png" alt="package.json"></p>
+<p>  生成的package.json文件如下图所示</p>
+<p>  <img src="..//images/gulp2.png" alt="package.json"></p>
+</li>
+<li><p>安装gulp </p>
+<pre><code>npm install gulp -g //全局安装
+npm install gulp --save-dev //工程目录下会生成一个node_modules文件，里面保存着开发所需要的依赖
+</code></pre><p>  当你为你的模块安装一个依赖模块时，正常情况下你得先安装他们（在模块根目录下npm install module-name），然后连同版本号手动将他们添加到模块配置文件package.json中的依赖里（devDependencies）–摘自网络</p>
+<ul>
+<li>-save和save-dev可以省掉你手动修改package.json文件的步骤。</li>
+<li>-save 自动把模块和版本号添加到dependencies部分</li>
+<li><p>-save-dve 自动把模块和版本号添加到devdependencies部分</p>
+<p>至于配置文件区分这俩部分， 是用于区别开发依赖模块和产品依赖模块， 以我见过的情况来看 devDepandencies主要是配置测试框架</p>
+</li>
+</ul>
+</li>
+<li><p>开始使用</p>
+<p>  在项目目录下创建一个gulpfile.js文件，这个文件就gulp任务的入口文件,在gulpfile.js文件中添加以下代码段，在项目目录下执行gulp,可以看出命令行输出了“gulp任务执行啦~~~”</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line">gulp.task(<span class="string">"default"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"gulp任务执行啦~~~"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>好吧，关于gulp的接口只有那么几个，自己去看一看</p>
+<h3 id="1-3-我自己的学习经验就是："><a href="#1-3-我自己的学习经验就是：" class="headerlink" title="1.3 我自己的学习经验就是："></a>1.3 我自己的学习经验就是：</h3><ul>
+<li><p>正确认识gulp: 它并不是一个什么多么难的新知识，只要我们根据要求配合插件可以实现非常强大的功能。</p>
+</li>
+<li><p>重要的是我们要知道有哪些插件，最好的就是我们在使用过程中想要用什么功能（压缩js，合并js，拷贝文件，简直不要太多）就去网上搜一下，各种插件就出来了</p>
+</li>
+<li><p>自己可以根据任务搭建一套手脚架，提高开发效率</p>
+</li>
+</ul>
+<h2 id="1-4-比较好的gulp插件"><a href="#1-4-比较好的gulp插件" class="headerlink" title="1.4 比较好的gulp插件"></a>1.4 比较好的gulp插件</h2><ul>
+<li>autoprefixer: 自动添加css兼容前缀</li>
+<li>run-sequence：让任务船型执行</li>
+<li><a href="https://github.com/Platform-CUF/use-gulp" target="_blank" rel="noopener">这里很多资料，不骗你</a></li>
+</ul>
+<h2 id="2-项目中使用ES6的模块"><a href="#2-项目中使用ES6的模块" class="headerlink" title="2. 项目中使用ES6的模块"></a>2. 项目中使用ES6的模块</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">buildjs :<span class="function">(<span class="params">fromPath,toPath,name</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> browserify(&#123;</span><br><span class="line">        entries: [fromPath],</span><br><span class="line">        debug: <span class="literal">true</span>, <span class="comment">// 告知Browserify在运行同时生成内联sourcemap用于调试</span></span><br><span class="line">    &#125;).transform(<span class="string">"babelify"</span>, &#123;<span class="attr">presets</span>: [<span class="string">"es2015"</span>]&#125;)<span class="comment">//转为ES5</span></span><br><span class="line">        .bundle()<span class="comment">//打包</span></span><br><span class="line">        .pipe(source(name ? name : <span class="string">"app.js"</span> ))</span><br><span class="line">        .pipe(buffer()) <span class="comment">// 缓存文件内容</span></span><br><span class="line">        .pipe(gulp.dest(toPath));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-参考文章"><a href="#3-参考文章" class="headerlink" title="3. 参考文章"></a>3. 参考文章</h2><ul>
+<li><a href="http://div.io/topic/1506" target="_blank" rel="noopener">使用 gulp 搭建前端环境之CommonJs &amp; ES6 模块化(中级篇)</a></li>
+</ul>
+<hr>
+<p>做一个勤于思考的人</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/网络/HTTP简介.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -987,318 +1396,11 @@ entity-body
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/前端面试题/前端面试题-第二套.html" itemprop="url">前端面试题-第二套</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:10:00+08:00">
-                2017-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTML5学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">HTML5学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/前端面试题/前端面试题-第二套.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/前端面试题/前端面试题-第二套.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc"><a href="#1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc" class="headerlink" title="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc"></a>1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o<strong>3052202501</strong>;ptisp=ctc</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果配合其他的字符的话,可以知道,加粗的那个"3052202501"</span></span><br><span class="line"><span class="keyword">var</span> rg1 = <span class="regexp">/uin=o(\d&#123;10&#125;)/g</span>;</span><br><span class="line"><span class="keyword">var</span> match = rg1.exec(str);</span><br><span class="line"><span class="keyword">var</span> index = <span class="built_in">parseInt</span>(match.index)+<span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"匹配的字符串的位置在:"</span>+index);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"匹配到的字符串为:"</span>+match[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
-<h4 id="2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数"><a href="#2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数" class="headerlink" title="2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数"></a>2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">               <span class="keyword">var</span> length = str.length;</span><br><span class="line">               <span class="keyword">if</span>(length ==<span class="number">0</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">var</span> max = <span class="number">1</span>;</span><br><span class="line">               <span class="keyword">var</span> maxChar = str[<span class="number">0</span>];</span><br><span class="line">               <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">                   <span class="keyword">if</span>(str[i] <span class="keyword">in</span> obj)&#123;</span><br><span class="line">                       obj[str[i]] ++;</span><br><span class="line">                       <span class="keyword">if</span>(max &lt; obj[str[i]])&#123;</span><br><span class="line">                           max = obj[str[i]];</span><br><span class="line">                           maxChar = str[i];</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                       obj[str[i]] = <span class="number">1</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">              <span class="keyword">return</span> &#123;</span><br><span class="line">                  maxNum : max,</span><br><span class="line">                  maxChar :maxChar</span><br><span class="line">              &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7"><a href="#3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7" class="headerlink" title="3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7"></a>3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</h4><p>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。</p>
-<h4 id="4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集"><a href="#4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集" class="headerlink" title="4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集"></a>4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</h4><h4 id="5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。"><a href="#5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。" class="headerlink" title="5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。"></a>5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/01/个人成长/2017-01-13-plan.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/个人成长/2017-01-13-plan.html" itemprop="url">2017个人规划</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-13T22:48:53+08:00">
-                2017-01-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人成长/" itemprop="url" rel="index">
-                    <span itemprop="name">个人成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/个人成长/2017-01-13-plan.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/01/个人成长/2017-01-13-plan.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="种树最好的时间不是10年前，而是现在！那么从现在开始，要给自己的2017一个规划，每天都要有成长！"><a href="#种树最好的时间不是10年前，而是现在！那么从现在开始，要给自己的2017一个规划，每天都要有成长！" class="headerlink" title="种树最好的时间不是10年前，而是现在！那么从现在开始，要给自己的2017一个规划，每天都要有成长！"></a>种树最好的时间不是10年前，而是现在！那么从现在开始，要给自己的2017一个规划，每天都要有成长！</h4><h4 id="没有清楚的自身定位-才会在做选择的时候犹豫-才会经常迷茫-需要向别人求助。"><a href="#没有清楚的自身定位-才会在做选择的时候犹豫-才会经常迷茫-需要向别人求助。" class="headerlink" title="没有清楚的自身定位,才会在做选择的时候犹豫,才会经常迷茫,需要向别人求助。"></a>没有清楚的自身定位,才会在做选择的时候犹豫,才会经常迷茫,需要向别人求助。</h4><h4 id="之前的一年里没有系统的知识管理，一直零零散散的记录不成体系。接下来的17年给自己一个新的规划，有计划有体系的成长。"><a href="#之前的一年里没有系统的知识管理，一直零零散散的记录不成体系。接下来的17年给自己一个新的规划，有计划有体系的成长。" class="headerlink" title="之前的一年里没有系统的知识管理，一直零零散散的记录不成体系。接下来的17年给自己一个新的规划，有计划有体系的成长。"></a>之前的一年里没有系统的知识管理，一直零零散散的记录不成体系。接下来的17年给自己一个新的规划，有计划有体系的成长。</h4><h4 id="毕业也快2年了，如果3年内知识结构缺口很大的话，很快会被淘汰，要有危机意识。"><a href="#毕业也快2年了，如果3年内知识结构缺口很大的话，很快会被淘汰，要有危机意识。" class="headerlink" title="毕业也快2年了，如果3年内知识结构缺口很大的话，很快会被淘汰，要有危机意识。"></a>毕业也快2年了，如果3年内知识结构缺口很大的话，很快会被淘汰，要有危机意识。</h4><hr>
-<p>做个会思考的人~</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1346,7 +1448,7 @@ entity-body
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1357,7 +1459,7 @@ entity-body
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
